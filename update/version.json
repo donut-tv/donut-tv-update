@@ -1,10 +1,9 @@
 {
-  "version": "26.6.0",
+  "version": "26.6.1",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk",
   "notes": [
-    "面板玻璃后面不再透出底部背板",
-    "「厚实」改为完全不透，所有页面与桌面同步",
-    "返回上级回到刚才那一行，不再跳到最上面",
-    "动态壁纸选项上移不再卡住"
+    "个性化面板上下移动不再卡住",
+    "滚到最下面也能一次回到上面的壁纸排",
+    "动态壁纸选项和卡片之间切换更顺"
   ]
 }
