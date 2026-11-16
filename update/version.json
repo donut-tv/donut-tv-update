@@ -1,9 +1,10 @@
 {
-  "version": "26.6.1",
+  "version": "26.6.2",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk",
   "notes": [
-    "个性化面板上下移动不再卡住",
-    "滚到最下面也能一次回到上面的壁纸排",
-    "动态壁纸选项和卡片之间切换更顺"
+    "开机与唤醒后桌面出得更快",
+    "唤醒时不再等网络，天气壁纸直接用缓存",
+    "遥控未连上时右上角会提示「遥控器连接中…」",
+    "第一次按键不再卡顿"
   ]
 }
