@@ -16,7 +16,7 @@
 <meta name="description" content="参照 tvOS 设计的开源 Android TV 桌面。没有广告，没有推荐流，只有你的 App、你的壁纸和航拍屏保。支持小米、TCL、创维、索尼等国产电视和盒子，开机自动接管。">
 <meta property="og:title" content="Donut TV · 给国产电视的一块干净桌面">
 <meta property="og:description" content="参照 tvOS 设计的开源电视桌面，没有广告，开机自动接管。">
-<meta property="og:image" content="img/home.jpg?v=165">
+<meta property="og:image" content="img/home.jpg?v=1666">
 <meta name="theme-color" content="#000000">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="stylesheet" href="style.css?v=12">
@@ -53,7 +53,7 @@
       <div class="glow"></div>
       <div class="screen compare" id="compare" role="slider" tabindex="0" aria-label="电视自带的桌面和 Donut TV 的对比，左右移动查看" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
         <img class="before" src="img/stock-xiaomi.jpg?v=3" alt="电视自带的桌面：满屏剧集推荐、会员和限免角标" width="1600" height="900">
-        <div class="after"><img src="img/home.jpg?v=165" alt="Donut TV 首页：夏威夷威马努山谷的航拍壁纸，玻璃底板上一排六个 App" width="1600" height="900"></div>
+        <div class="after"><img src="img/home.jpg?v=1666" alt="Donut TV 首页：软件自带的甜甜圈动态壁纸，玻璃底板上是常用 App" width="1600" height="900"></div>
         <div class="divider" aria-hidden="true"><span class="knob"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 6l-6 6 6 6M15 6l6 6-6 6"/></svg></span></div>
       </div>
       <div class="stand"></div>
@@ -69,7 +69,7 @@
   <div class="wrap">
     <div class="head reveal">
       <h2>安静，<br>是最好的界面。</h2>
-      <p>打开电视，只有壁纸和你常用的 App。</p>
+      <p>打开电视，只有一张你自己选的壁纸和你常用的 App。</p>
     </div>
 
     <div class="feature reveal">
@@ -102,11 +102,12 @@
     </div>
 
     <div class="feature flip reveal">
-      <div class="shot"><img src="img/control-center.jpg?v=166" alt="控制中心：信号源、网络、设置、音量和亮度" loading="lazy" width="1600" height="900"></div>
+      <div class="shot"><img src="img/glass.jpg?v=1666" alt="控制中心：一块磨砂玻璃面板，背后的甜甜圈壁纸颜色透上来" loading="lazy" width="1600" height="900"></div>
       <div>
-        <p class="kicker">控制中心</p>
-        <h3>常用开关，<br>一键就到。</h3>
-        <p>信号源、网络、设置、音量、亮度都在这里。HDMI 还能固定到首页，一键切换。</p>
+        <p class="kicker">液态玻璃</p>
+        <h3>一块玻璃，<br>透出后面的壁纸。</h3>
+        <p>控制中心、底板、设置页都是磨砂玻璃，不是死黑的卡片。背后的壁纸颜色会透上来，焦点移过去时玻璃亮一层；亮壁纸不糊字，暗壁纸不发灰。</p>
+        <p>信号源、网络、设置、音量、亮度、夜览、儿童与家长都在这块面板上，一按就到。</p>
       </div>
     </div>
 
@@ -116,6 +117,26 @@
         <p class="kicker">布局</p>
         <h3>一排放几个，<br>你说了算。</h3>
         <p>每排 4、5 或 6 个 App，单排或双排，时钟大小、App 名称、第一排底板也都能改。文件夹和手机上的整理页跟着一起变。</p>
+      </div>
+    </div>
+
+    <div class="feature flip reveal">
+      <div class="shot"><img src="img/night.jpg?v=1666" alt="夜览定时：每天 22:00 自动开、06:00 自动关" loading="lazy" width="1600" height="900"></div>
+      <div>
+        <p class="kicker">夜览模式</p>
+        <h3>晚上看，<br>别那么刺眼。</h3>
+        <p>一键把整块屏幕调暖，<strong>视频和屏保也跟着暖</strong>，不只是桌面。</p>
+        <p>也能设成每天定时：22:00 自动开、06:00 自动关，跨午夜照样算得准。入口就在控制中心，一按就到。</p>
+      </div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="shot"><img src="img/kids.jpg?v=1666" alt="儿童与家长：家长密码、单次时长 60 分钟、强制休息 10 分钟、每周时间表" loading="lazy" width="1600" height="900"></div>
+      <div>
+        <p class="kicker">儿童模式</p>
+        <h3>看多久，<br>你说了算。</h3>
+        <p>家长密码锁住设置，再限单次时长、强制休息、到点睡觉，还能按周排时间表。</p>
+        <p>全场景计时，熄屏也在算。到点全屏休息，输密码才能接着看。</p>
       </div>
     </div>
   </div>
@@ -142,12 +163,22 @@
 
 <section>
   <div class="wrap">
-    <div class="feature reveal">
-      <div class="shot"><img src="img/wallpaper.jpg?v=165" alt="个性化面板：壁纸选了航拍" loading="lazy" width="1600" height="900"></div>
+    <div class="feature flip reveal">
+      <div class="shot"><img src="img/flipclock.jpg?v=1666" alt="翻页时钟屏保：黑白大数字，像墙上那只真的钟" loading="lazy" width="1600" height="900"></div>
       <div>
-        <p class="kicker">壁纸</p>
-        <h3>会动的风景，<br>或者你的照片。</h3>
-        <p>航拍壁纸停在主屏幕时在 App 后面慢慢播放，按任意键停在当前画面。也可以选必应每日一图、14 张 Mac 风格的内置壁纸，或者从手机传的照片和视频。</p>
+        <p class="kicker">翻页时钟</p>
+        <h3>不用的时候，<br>它就是一只钟。</h3>
+        <p>屏保选翻页钟：黑白大数字，一分一秒真的翻过去。也能换成航拍、照片、自己的视频，或者桌面那块玻璃时钟。</p>
+      </div>
+    </div>
+
+    <div class="feature reveal">
+      <div class="shot"><img src="img/wallpaper.jpg?v=1666" alt="个性化壁纸页：动态壁纸里选中了自带的 Donut TV" loading="lazy" width="1600" height="900"></div>
+      <div>
+        <p class="kicker">个性化壁纸</p>
+        <h3>开机就是这张，<br>也能换成你的。</h3>
+        <p>自带一张甜甜圈壁纸，静态和动态各一版，新装的电视开机就是它。航拍壁纸停在主屏幕时在 App 后面慢慢播放，按任意键停在当前画面。</p>
+        <p>此外还有必应每日一图、在线图集、内置渐变，或者用手机扫码传自己的照片和视频。</p>
       </div>
     </div>
     <div class="phone-row reveal" style="margin-top:110px">
@@ -340,7 +371,7 @@
       </details>
       <details>
         <summary>Agent 说装好了，电视上却没变？</summary>
-        <p>有的 Agent 没运行命令就说成功了。让它按 <a href="agent.md">安装说明</a> 的「验收」把原始输出贴出来：<code>resolve-activity</code> 解析到的桌面、<code>enabled_accessibility_services</code> 里有没有 <code>app.orange.tv</code>、按主页键后的 <code>mCurrentFocus</code>。最后一条里有 <code>app.orange.tv</code> 才算装好。</p>
+        <p>有的 Agent 没运行命令就说成功了。让它按 <a href="agent.md">安装说明</a> 的「验收」把原始输出贴出来：<code>resolve-activity</code> 解析到的桌面、<code>enabled_accessibility_services</code> 里有没有 <code>app.donut.tv</code>、按主页键后的 <code>mCurrentFocus</code>。最后一条里有 <code>app.donut.tv</code> 才算装好。</p>
       </details>
       <details>
         <summary>没有电脑，只用手机能装吗？</summary>
@@ -395,7 +426,7 @@
 请先完整读完安装说明再动手，然后在我的电脑上亲自运行命令，不要只把步骤告诉我。需要我在电视上操作时提醒我。
 最后按说明里的「验收」，把下面几条命令的原始输出原样贴给我，不要只写「成功」：
 - adb shell "cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME"（解析到的桌面）
-- adb shell settings get secure enabled_accessibility_services（里面有没有 app.orange.tv/app.orange.tv.guard.HomeGuardService）
+- adb shell settings get secure enabled_accessibility_services（里面有没有 app.donut.tv/app.donut.tv.guard.HomeGuardService）
 - 按主页键后的 adb shell "dumpsys window | grep mCurrentFocus"
 如果没有安装成功，直接告诉我卡在哪一步。`,
     adapt: (ip, guide) =>
@@ -410,7 +441,7 @@
 `请按 ${guide} 里「还原」部分的步骤，把我电视（IP：${ip}）的桌面还原成原来的，Donut TV 先不卸载。
 请在我的电脑上亲自运行命令，不要只把步骤发给我。
 最后把下面两条命令的原始输出贴给我：
-- adb shell settings get secure enabled_accessibility_services（应该已经不含 app.orange.tv）
+- adb shell settings get secure enabled_accessibility_services（应该已经不含 app.donut.tv）
 - 按主页键后的 adb shell "dumpsys window | grep mCurrentFocus"（应该回到电视原来的桌面）`,
   };
 </script>

@@ -11,39 +11,78 @@
 
 <a href="LICENSE"><img alt="许可证 MIT" src="https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT-555555?style=flat-square"></a>
 <img alt="Android TV 5.0+" src="https://img.shields.io/badge/Android%20TV-5.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white">
-<img alt="版本 26.6.5" src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-26.6.5-2997ff?style=flat-square">
+<img alt="版本 26.6.6" src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-26.6.6-2997ff?style=flat-square">
 
 ![Donut TV 首页](site/img/home.jpg)
 
 | 电视自带的桌面 | 换上 Donut TV 之后 |
 |:---:|:---:|
-| <img src="site/img/stock-xiaomi.jpg" alt="电视自带的桌面：满屏剧集推荐、会员和限免角标"> | <img src="site/img/home.jpg" alt="Donut TV 首页"> |
+| <img src="site/img/stock-xiaomi.jpg" alt="电视自带的桌面：满屏剧集推荐、会员和限免角标"> | <img src="site/img/home.jpg" alt="Donut TV 首页：软件自带的甜甜圈动态壁纸"> |
 
 </div>
 
-## 功能
+## 亮点
 
 <p align="center">
-  <img src="site/img/focus.jpg" width="49%" alt="第一排的玻璃底板">
+  <img src="site/img/home.jpg" width="100%" alt="Donut TV 首页：软件自带的甜甜圈动态壁纸，玻璃底板上是常用 App">
+</p>
+
+### 液态玻璃
+
+<p align="center">
+  <img src="site/img/glass.jpg" width="74%" alt="控制中心：一块磨砂玻璃面板，背后的甜甜圈壁纸颜色透上来">
+</p>
+
+控制中心、底板、设置页都是一块磨砂玻璃，不是死黑的卡片：背后的壁纸颜色会透上来，焦点移过去时玻璃亮一层。亮壁纸不糊字，暗壁纸不发灰。
+
+### 夜览模式
+
+<p align="center">
+  <img src="site/img/night.jpg" width="74%" alt="夜览定时：每天 22:00 自动开、06:00 自动关">
+</p>
+
+一键把整块屏幕调暖，视频和屏保跟着一起暖，不只是桌面。也能设成每天定时：22:00 自动开、06:00 自动关，跨午夜照样算得准。入口在控制中心，一按就到。
+
+### 儿童模式
+
+<p align="center">
+  <img src="site/img/kids.jpg" width="74%" alt="儿童与家长：家长密码、单次时长 60 分钟、强制休息 10 分钟、每周时间表">
+</p>
+
+用家长密码锁住设置，再限单次时长、强制休息、到点睡觉、按周排时间表。全场景计时，熄屏也在算；到点全屏休息，输密码才能接着看。
+
+### 翻页时钟
+
+<p align="center">
+  <img src="site/img/flipclock.jpg" width="74%" alt="翻页时钟屏保：黑白大数字">
+</p>
+
+屏保可选翻页钟：黑白大数字，一分一秒真的翻过去，像墙上那只。也能换成航拍、照片、自己的视频，或者桌面那块玻璃时钟。
+
+### 个性化壁纸
+
+<p align="center">
+  <img src="site/img/wallpaper.jpg" width="74%" alt="个性化壁纸页：动态壁纸里选中了自带的 Donut TV">
+</p>
+
+自带一张甜甜圈壁纸，静态和动态各一版，新装的电视开机就是它。此外还有必应每日精选、在线图集、内置渐变，或者用手机扫码传自己的照片和视频。
+
+### 还有
+
+<p align="center">
+  <img src="site/img/focus.jpg" width="49%" alt="第一排的玻璃底板，焦点停在 my DV 上">
   <img src="site/img/grid.jpg" width="49%" alt="往下滚动后的应用网格，中间有一个文件夹">
 </p>
 
 - **首页**：常用的一排 App 放在屏幕下方的玻璃底板上，往下是全部 App。小米「应用中心」「米家」这类藏起来的系统 App 也在。
 - **整理**：长按 OK 键可以移动、放进文件夹、隐藏、卸载，或者设成「开机时打开」（开机、待机醒来直接进这个 App 或信号源）。**菜单键打开 Donut TV 的控制中心**（再按一次收起）。固定到主屏幕的 HDMI 可以选接的是 Apple TV、PlayStation、Switch、Xbox、电脑等，换成对应的图标，也能在手机上起名字。
 - **用手机整理**：扫电视上的二维码，手机上就是和电视一样的图标网格：按住拖动排序，点一下改名、换图标、放进文件夹或隐藏，也能把 HDMI 等信号源加到主屏幕。
-- **控制中心**：在第一排按上键到右上角打开，有信号源、网络、设置、音量、亮度和个性化。
-- **屏保**：Apple TV 的 114 段航拍影片，电视支持时播 4K 或 4K 杜比视界，也可以换成照片、时钟或从手机添加的本地视频（[说明](docs/SCREENSAVER_VIDEOS.md)）。
-- **壁纸**：必应每日精选、14 张内置壁纸、用手机扫码传的照片和视频，或者航拍：停在主屏幕 10 秒后在磁贴后面播放，按任意键停在当前画面。
+- **屏保**：Apple TV 的 114 段航拍影片，电视支持时播 4K 或 4K 杜比视界；也能换成照片、时钟或从手机添加的本地视频（[说明](docs/SCREENSAVER_VIDEOS.md)）。停在主屏幕 10 秒，航拍在磁贴后面动起来，按任意键停在当前画面。
 - **个性化**：每排 4、5 或 6 个 App，单排或双排、时钟大小和位置、App 名称、焦点样式、按键声音，都能改。
 
 <p align="center">
+  <img src="site/img/menu.jpg" width="49%" alt="长按菜单：移动、移到文件夹、从主屏幕隐藏、应用信息、开机时打开、卸载">
   <img src="site/img/folder.jpg" width="49%" alt="打开的文件夹">
-  <img src="site/img/control-center.jpg" width="49%" alt="控制中心">
-</p>
-
-<p align="center">
-  <img src="site/img/screensaver-aerial.jpg" width="49%" alt="航拍屏保">
-  <img src="site/img/columns.jpg" width="49%" alt="个性化：每排 App 选 6 个">
 </p>
 
 ## 安装
@@ -93,7 +132,7 @@ adb connect 192.168.1.20:39201   # 无线调试主页面上的另一组 IP:端�
 - 按主页键后的 adb shell "dumpsys window | grep mCurrentFocus"
 ```
 
-手机上的豆包、网页版聊天只会把步骤告诉你，不会执行；要用能跑命令的电脑版 / 工作版（豆包电脑版或豆包工作版、WorkBuddy、千问电脑版、Trae、Claude Code、Codex 等）。Agent 说装好了，看它贴出的 `mCurrentFocus` 输出里有没有 `app.orange.tv`。
+手机上的豆包、网页版聊天只会把步骤告诉你，不会执行；要用能跑命令的电脑版 / 工作版（豆包电脑版或豆包工作版、WorkBuddy、千问电脑版、Trae、Claude Code、Codex 等）。Agent 说装好了，看它贴出的 `mCurrentFocus` 输出里有没有 `app.donut.tv`。
 
 **没有电脑**：有用户用手机上的甲壳虫 ADB 助手、超级小爱装成功过，本仓库没有逐一实测。步骤和上面的 Windows 步骤一样，装好后建议再用电脑跑一遍验收。
 
@@ -113,11 +152,11 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools
 ```bash
 adb connect 192.168.1.20:5555
 adb install -r donut.apk
-adb shell pm grant app.orange.tv android.permission.WRITE_SECURE_SETTINGS
-adb shell cmd notification allow_listener app.orange.tv/app.orange.tv.guard.RevivalListener
-adb shell appops set app.orange.tv SYSTEM_ALERT_WINDOW allow
-adb shell am start -n app.orange.tv/.MainActivity
-adb shell cmd package compile -m speed -f app.orange.tv
+adb shell pm grant app.donut.tv android.permission.WRITE_SECURE_SETTINGS
+adb shell cmd notification allow_listener app.donut.tv/app.donut.tv.guard.RevivalListener
+adb shell appops set app.donut.tv SYSTEM_ALERT_WINDOW allow
+adb shell am start -n app.donut.tv/.MainActivity
+adb shell cmd package compile -m speed -f app.donut.tv
 ```
 
 最后一条让 Donut TV 在电视上更流畅：等 Donut TV 显示出来、过 5 秒再运行，要几十秒。不运行的话，Donut TV 要等到下次从控制中心升级时才会编译。
@@ -139,7 +178,7 @@ Windows 用 Agent 装，或照[安装说明](site/agent.md)里的 Windows 步骤
 
 ### Android 4.0–4.4 老电视：Donut TV Lite（测试版）
 
-Android 4.0–4.4 的老电视、老盒子装不了完整版（界面框架最低要 Android 5.0），所以有一个单独的 **Donut TV Lite**：包名 `app.orange.tv.lite`，外观和完整版一样。
+Android 4.0–4.4 的老电视、老盒子装不了完整版（界面框架最低要 Android 5.0），所以有一个单独的 **Donut TV Lite**：包名 `app.donut.tv.lite`，外观和完整版一样。
 
 > **Lite 现在是第一版（1.0），属于测试版。** 只在 Android 4.0.4 / 4.4.4 虚拟机，以及小米、TCL 的新电视上测过，还没在真实的 4.x 电视上用过，可能有不少小问题。**只适配 Android 4.0–4.4**；Android 5.0 及以上请用上面的完整版。遇到问题请用[机型适配模板](https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml)反馈，标题写上 Lite。
 
@@ -154,8 +193,8 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools
 ```bash
 adb connect 192.168.1.20:5555
 adb install -r lite-release.apk
-adb shell pm grant app.orange.tv.lite android.permission.WRITE_SECURE_SETTINGS   # 调亮度用；Android 4.0 会报错，可以忽略
-adb shell am start -n app.orange.tv.lite/.HomeActivity
+adb shell pm grant app.donut.tv.lite android.permission.WRITE_SECURE_SETTINGS   # 调亮度用；Android 4.0 会报错，可以忽略
+adb shell am start -n app.donut.tv.lite/.HomeActivity
 ```
 
 **U 盘**：把 `lite-release.apk` 拷进 U 盘，用电视的文件管理器打开安装。
@@ -164,7 +203,7 @@ adb shell am start -n app.orange.tv.lite/.HomeActivity
 
 **和完整版的区别**：没有桌面守护（无障碍接管），开机和主页键全靠系统的默认桌面；没有航拍壁纸、「我的视频」壁纸、信号源磁贴（4.x 没有电视输入框架，信号源按钮打开电视自己的信号源面板）、应用内升级（升级就是再装一次，设置保留）。航拍屏保、照片和每日一图、时钟、文件夹、长按菜单、控制中心、个性化、手机配置页都有。详细说明见 [docs/LITE.md](docs/LITE.md)。
 
-**还原**：电视上 设置 → 应用 → Donut TV Lite → 清除默认设置，再按主页键选原来的桌面；或者直接卸载：`adb uninstall app.orange.tv.lite`（一行命令的 `bash -s restore --uninstall` 也会卸载它）。
+**还原**：电视上 设置 → 应用 → Donut TV Lite → 清除默认设置，再按主页键选原来的桌面；或者直接卸载：`adb uninstall app.donut.tv.lite`（一行命令的 `bash -s restore --uninstall` 也会卸载它）。
 
 ### 还原
 

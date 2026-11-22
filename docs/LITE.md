@@ -1,6 +1,6 @@
 # Donut TV Lite（Android 4.0–4.4）
 
-给 Android 4.x 老电视用的精简版桌面，模块是 `lite/`，包名 `app.orange.tv.lite`，minSdk 14（Android 4.0），和完整版用同一把签名。
+给 Android 4.x 老电视用的精简版桌面，模块是 `lite/`，包名 `app.donut.tv.lite`，minSdk 14（Android 4.0），和完整版用同一把签名。
 
 ## 为什么是单独的 App
 

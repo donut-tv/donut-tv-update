@@ -11,17 +11,63 @@ Made for Xiaomi, TCL, Skyworth, Sony and other TVs sold in China, and runs on bo
 
 <a href="LICENSE"><img alt="License: MIT" src="https://img.shields.io/badge/license-MIT-555555?style=flat-square"></a>
 <img alt="Android TV 5.0+" src="https://img.shields.io/badge/Android%20TV-5.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white">
-<img alt="Version 26.6.5" src="https://img.shields.io/badge/version-26.6.5-2997ff?style=flat-square">
+<img alt="Version 26.6.6" src="https://img.shields.io/badge/version-26.6.6-2997ff?style=flat-square">
 
 ![Donut TV's home screen](site/img/home.jpg)
 
 | The TV's stock home screen | With Donut TV |
 |:---:|:---:|
-| <img src="site/img/stock-xiaomi.jpg" alt="The stock home screen, covered in show recommendations and membership badges"> | <img src="site/img/home.jpg" alt="Donut TV's home screen"> |
+| <img src="site/img/stock-xiaomi.jpg" alt="The stock home screen, covered in show recommendations and membership badges"> | <img src="site/img/home.jpg" alt="Donut TV's home screen with the donut wallpaper it ships with"> |
 
 </div>
 
-## Features
+## Highlights
+
+<p align="center">
+  <img src="site/img/home.jpg" width="100%" alt="Donut TV's home screen with the donut wallpaper it ships with">
+</p>
+
+### Liquid glass
+
+<p align="center">
+  <img src="site/img/glass.jpg" width="74%" alt="Control Center: one frosted glass panel with the donut wallpaper showing through">
+</p>
+
+Control Center, the shelf and the settings pages are milled glass, not flat black cards: the colour of the wallpaper behind them comes through, and the pane brightens as focus moves onto it. No smeared text on a bright photo, no grey box on a dark one.
+
+### Night view
+
+<p align="center">
+  <img src="site/img/night.jpg" width="74%" alt="Night view schedule: on at 22:00, off at 06:00, every day">
+</p>
+
+One press warms the whole screen, video and screensaver included, not just the home screen. It can also run on a schedule: on at 22:00, off at 06:00, across midnight too. It lives in Control Center, one press away.
+
+### Kids mode
+
+<p align="center">
+  <img src="site/img/kids.jpg" width="74%" alt="Kids and family: parent PIN, 60 minute sessions, 10 minute forced breaks, weekly timetable">
+</p>
+
+A parent PIN locks the settings, then you cap session length, force breaks, set a bedtime and lay out a weekly timetable. Time counts everywhere, even with the screen off; when it runs out the TV rests full screen and asks for the PIN.
+
+### Flip clock
+
+<p align="center">
+  <img src="site/img/flipclock.jpg" width="74%" alt="The flip clock screensaver: big black and white digits">
+</p>
+
+The screensaver can be a flip clock: big black and white digits that really turn, minute by minute. Or aerial films, your photos, your own videos, or the glass clock on Home.
+
+### Your own wallpaper
+
+<p align="center">
+  <img src="site/img/wallpaper.jpg" width="74%" alt="Wallpaper page, with the bundled Donut TV film selected">
+</p>
+
+It ships with a donut wallpaper, one still and one moving, and a fresh install starts on it. Beyond that: Bing's photo of the day, a curated online set, built-in gradients, or your own photos and videos sent from your phone by scanning a code.
+
+### And the rest
 
 <p align="center">
   <img src="site/img/focus.jpg" width="49%" alt="The glass shelf under the top row">
@@ -31,19 +77,12 @@ Made for Xiaomi, TCL, Skyworth, Sony and other TVs sold in China, and runs on bo
 - **Home**: your favorite apps in one row on a glass shelf at the bottom, every app below it. Hidden system apps like Xiaomi's App Store and Mi Home show up too.
 - **Organize**: hold OK (or press Menu) to move an app, put it in a folder, hide it, uninstall it, or have the TV open it at power on and wake. An HDMI input pinned to Home can say what is plugged in (Apple TV, PlayStation, Switch, Xbox, a computer...) and take its icon, or a name you type on your phone.
 - **Arrange from your phone**: scan the code on the TV and your phone shows Home as the TV lays it out. Drag tiles into place; tap one to rename it, change its icon, put it in a folder or hide it; add HDMI and other inputs to Home.
-- **Control Center**: press Up from the top row to the top right. Inputs, network, settings, volume, brightness and Personalize.
-- **Screensaver**: Apple TV's 114 aerial films, in 4K or 4K Dolby Vision where the TV supports it, your photos, a clock, or local videos sent from your phone ([guide, Chinese](docs/SCREENSAVER_VIDEOS.md)).
-- **Wallpaper**: Bing's photo of the day, fourteen built-ins, photos and videos you upload by scanning a code with your phone, or aerial films that play behind the apps after ten still seconds on Home and stop on the frame showing at any key.
+- **Screensaver**: Apple TV's 114 aerial films, in 4K or 4K Dolby Vision where the TV supports it, your photos, a clock, or local videos sent from your phone ([guide, Chinese](docs/SCREENSAVER_VIDEOS.md)). After ten still seconds on Home the aerial film plays behind the apps and stops on the frame showing at any key.
 - **Personalize**: four, five or six apps a row, one or two rows, clock size and corner, app names, focus style and key sounds.
 
 <p align="center">
+  <img src="site/img/menu.jpg" width="49%" alt="The long-press menu: Move, Move to Folder, Hide from Home, App Info, Open When TV Turns On, Uninstall">
   <img src="site/img/folder.jpg" width="49%" alt="An open folder">
-  <img src="site/img/control-center.jpg" width="49%" alt="Control Center">
-</p>
-
-<p align="center">
-  <img src="site/img/screensaver-aerial.jpg" width="49%" alt="Donut TV screensaver">
-  <img src="site/img/columns.jpg" width="49%" alt="Personalize, with six apps per row">
 </p>
 
 ## Install
@@ -95,7 +134,7 @@ At the end, paste the raw output of these commands from the "Check" section, not
 - adb shell "dumpsys window | grep mCurrentFocus" after pressing Home
 ```
 
-Phone apps and web chats, including Doubao on a phone, only tell you the steps; they can't run anything. Use a desktop build that can (Doubao for desktop or Doubao Work, WorkBuddy, Qwen for desktop, Trae, Claude Code, Codex…). When the agent says it's done, check that the `mCurrentFocus` output it pastes includes `app.orange.tv`.
+Phone apps and web chats, including Doubao on a phone, only tell you the steps; they can't run anything. Use a desktop build that can (Doubao for desktop or Doubao Work, WorkBuddy, Qwen for desktop, Trae, Claude Code, Codex…). When the agent says it's done, check that the `mCurrentFocus` output it pastes includes `app.donut.tv`.
 
 **USB drive (no computer)**: copy an APK to a USB drive and open it with the TV's file manager.
 
@@ -124,11 +163,11 @@ On a TV that only offers Wireless debugging (step 1), `export ADB_PAIR=<pairing-
 ```bash
 adb connect 192.168.1.20:5555
 adb install -r donut.apk
-adb shell pm grant app.orange.tv android.permission.WRITE_SECURE_SETTINGS
-adb shell cmd notification allow_listener app.orange.tv/app.orange.tv.guard.RevivalListener
-adb shell appops set app.orange.tv SYSTEM_ALERT_WINDOW allow
-adb shell am start -n app.orange.tv/.MainActivity
-adb shell cmd package compile -m speed -f app.orange.tv
+adb shell pm grant app.donut.tv android.permission.WRITE_SECURE_SETTINGS
+adb shell cmd notification allow_listener app.donut.tv/app.donut.tv.guard.RevivalListener
+adb shell appops set app.donut.tv SYSTEM_ALERT_WINDOW allow
+adb shell am start -n app.donut.tv/.MainActivity
+adb shell cmd package compile -m speed -f app.donut.tv
 ```
 
 The last line makes Donut TV smoother on the TV: run it about 5 seconds after Donut TV shows, and it takes some tens of seconds. Without it, Donut TV is only compiled at its next update from Control Center.
@@ -141,7 +180,7 @@ On Windows, use an agent, or follow the Windows steps in the [install guide](sit
 
 ### Android 4.0–4.4: Donut TV Lite (beta)
 
-TVs and boxes on Android 4.0–4.4 cannot run the full app (its UI framework needs Android 5.0), so there is a separate **Donut TV Lite**: package `app.orange.tv.lite`, looking the same as the full app.
+TVs and boxes on Android 4.0–4.4 cannot run the full app (its UI framework needs Android 5.0), so there is a separate **Donut TV Lite**: package `app.donut.tv.lite`, looking the same as the full app.
 
 > **Lite is at its first release (1.0), a beta.** It was tested on Android 4.0.4 / 4.4.4 emulators and on newer Xiaomi and TCL TVs, not yet on a real 4.x TV, and may still have many small problems. **It is for Android 4.0–4.4 only**; on Android 5.0 and later use the full app above. Report problems with the [device support form](https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml), with Lite in the title.
 
@@ -156,8 +195,8 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools
 ```bash
 adb connect 192.168.1.20:5555
 adb install -r lite-release.apk
-adb shell pm grant app.orange.tv.lite android.permission.WRITE_SECURE_SETTINGS   # for brightness; Android 4.0 refuses it, which is fine
-adb shell am start -n app.orange.tv.lite/.HomeActivity
+adb shell pm grant app.donut.tv.lite android.permission.WRITE_SECURE_SETTINGS   # for brightness; Android 4.0 refuses it, which is fine
+adb shell am start -n app.donut.tv.lite/.HomeActivity
 ```
 
 **USB drive**: copy `lite-release.apk` to a drive and open it with the TV's file manager.
@@ -166,7 +205,7 @@ adb shell am start -n app.orange.tv.lite/.HomeActivity
 
 **Differences from the full app**: no Home Guard (accessibility takeover), so Home and boot depend on Android's default home; no aerial wallpaper, My Videos wallpaper, input tiles (4.x has no TV input framework; the Inputs button opens the TV's own input panel) or in-app updates (update by installing again; settings are kept). The aerial screensaver, photos and the daily picture, clocks, folders, the press-and-hold menu, Control Center, Personalize and the phone page are all there. More in [docs/LITE.md](docs/LITE.md) (Chinese).
 
-**Undo**: on the TV, Settings → Apps → Donut TV Lite → Clear defaults, then press Home and pick the old launcher; or uninstall it: `adb uninstall app.orange.tv.lite` (the one command's `bash -s restore --uninstall` removes it too).
+**Undo**: on the TV, Settings → Apps → Donut TV Lite → Clear defaults, then press Home and pick the old launcher; or uninstall it: `adb uninstall app.donut.tv.lite` (the one command's `bash -s restore --uninstall` removes it too).
 
 ### Undo
 

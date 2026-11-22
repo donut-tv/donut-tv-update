@@ -27,11 +27,11 @@
     $('#manualcmd').textContent =
 `adb connect ${ip}:5555
 adb install -r donut.apk
-adb shell pm grant app.orange.tv android.permission.WRITE_SECURE_SETTINGS
-adb shell cmd notification allow_listener app.orange.tv/app.orange.tv.guard.RevivalListener
-adb shell appops set app.orange.tv SYSTEM_ALERT_WINDOW allow
-adb shell appops set app.orange.tv APP_AUTO_START allow   # ${T.tclOnly}
-adb shell am start -n app.orange.tv/.MainActivity`;
+adb shell pm grant app.donut.tv android.permission.WRITE_SECURE_SETTINGS
+adb shell cmd notification allow_listener app.donut.tv/app.donut.tv.guard.RevivalListener
+adb shell appops set app.donut.tv SYSTEM_ALERT_WINDOW allow
+adb shell appops set app.donut.tv APP_AUTO_START allow   # ${T.tclOnly}
+adb shell am start -n app.donut.tv/.MainActivity`;
     $('#adaptprompt').textContent = T.adapt(ip, SITE + T.adaptGuide);
   }
 
