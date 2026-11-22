@@ -1,10 +1,9 @@
 {
-  "version": "26.6.2",
+  "version": "26.6.3",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk",
   "notes": [
-    "开机与唤醒后桌面出得更快",
-    "唤醒时不再等网络，天气壁纸直接用缓存",
-    "遥控未连上时右上角会提示「遥控器连接中…」",
-    "第一次按键不再卡顿"
+    "夜览护眼：一键开系统护眼，看片不刺眼",
+    "夜览定时：每天固定时段自动开关护眼",
+    "遥控连接提示改白字，亮壁纸也看得清"
   ]
 }
