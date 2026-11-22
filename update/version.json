@@ -1,9 +1,9 @@
 {
-  "version": "26.6.4",
+  "version": "26.6.5",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk",
   "notes": [
-    "改名为 Donut TV，图标换成甜甜圈",
-    "打赏页作者头像同步换成甜甜圈",
-    "英文壁纸分类名改为 Aerial"
+    "换成新的应用身份，需要卸载后重装一次",
+    "重装后设置回到默认，请重新设置",
+    "更新地址迁到 donut-tv，以后照常升级"
   ]
 }
