@@ -17,14 +17,14 @@
 
 | 电视自带的桌面 | 换上 Donut TV 之后 |
 |:---:|:---:|
-| <img src="site/img/stock-xiaomi.jpg" alt="电视自带的桌面：满屏剧集推荐、会员和限免角标"> | <img src="site/img/home.jpg" alt="Donut TV 首页：软件自带的甜甜圈动态壁纸"> |
+| <img src="site/img/stock-xiaomi.jpg" alt="电视自带的桌面：满屏剧集推荐、会员和限免角标"> | <img src="site/img/home.jpg" alt="Donut TV 首页：软件自带的甜甜圈壁纸"> |
 
 </div>
 
 ## 亮点
 
 <p align="center">
-  <img src="site/img/home.jpg" width="100%" alt="Donut TV 首页：软件自带的甜甜圈动态壁纸，玻璃底板上是常用 App">
+  <img src="site/img/home.jpg" width="100%" alt="Donut TV 首页：软件自带的甜甜圈壁纸，玻璃底板上是常用 App">
 </p>
 
 ### 液态玻璃
