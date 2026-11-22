@@ -1,9 +1,9 @@
 {
-  "version": "26.6.5",
+  "version": "26.6.6",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk",
   "notes": [
-    "换成新的应用身份，需要卸载后重装一次",
-    "重装后设置回到默认，请重新设置",
-    "更新地址迁到 donut-tv，以后照常升级"
+    "新增自带的甜甜圈壁纸：静态一张、动态一段",
+    "新装的电视默认就是这段动态壁纸，已选过的不动",
+    "位置天气改为三家投票，不再定位到别的省"
   ]
 }
