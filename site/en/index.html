@@ -32,7 +32,7 @@
       <a href="#install">Install</a>
       <a href="#adapt">Adapting</a>
       <a href="#faq">FAQ</a>
-      <a href="https://github.com/orange-tv888/orange-tv-update">GitHub</a>
+      <a href="https://github.com/donut-tv888/donut-tv-update">GitHub</a>
     </div>
     <a class="lang" href="../" data-lang="zh" hreflang="zh" lang="zh-CN">中文</a>
     <a class="cta" href="#install">Install</a>
@@ -46,7 +46,7 @@
     <p class="lede">A calm home screen for Android TV. <strong>No ads, no recommendation feeds.</strong> Just your apps, your wallpaper and Apple TV's aerial screensavers.</p>
     <div class="actions">
       <a class="btn primary" href="#install">Get started</a>
-      <a class="btn ghost" href="https://github.com/orange-tv888/orange-tv-update">View on GitHub ›</a>
+      <a class="btn ghost" href="https://github.com/donut-tv888/donut-tv-update">View on GitHub ›</a>
     </div>
     <div class="tv reveal">
       <div class="glow"></div>
@@ -191,7 +191,7 @@
       <span class="chip"><b>Konka</b> · Android 9</span>
       <span class="chip"><b>Boxes and projectors</b> · XGIMI, OBE, Aurora</span>
       <span class="chip"><b>Older TVs</b> · Android 4.0–4.4 with Donut TV Lite</span>
-      <a class="chip chip-link" href="https://github.com/orange-tv888/orange-tv-update/blob/main/README.en.md#supported-tvs">Full <b>list</b> ›</a>
+      <a class="chip chip-link" href="https://github.com/donut-tv888/donut-tv-update/blob/main/README.en.md#supported-tvs">Full <b>list</b> ›</a>
     </div>
     <p class="note devices-note reveal">Hisense / Vidda and some Coocaa sets boot into their own home first; FFALCON MT9655 models can't be taken over yet.</p>
   </div>
@@ -219,7 +219,7 @@
       <div class="panel" data-panel="oppo"><p>Settings (设置) → System (系统) → About (关于本机) → <b>Model</b> (设备型号), press <b>Up, Up, Right, Right</b>, then OK. Then Settings → System → <b>Developer options</b> (开发者选项) and turn on <b>USB debugging</b> (USB 调试, sometimes called ADB debugging).<br>The IP address is at the <b>bottom</b> of Settings → Network → the connected network.</p></div>
       <div class="panel" data-panel="other"><p>Settings → Device Preferences → About → press <b>Build</b> (not Android version) 7 times, then turn on <b>USB debugging</b> in Developer options.<br>The IP address is under Settings → Network → the connected network.</p></div>
       <p class="note">Some TVs cannot open ADB at all: old LeTV sets, Honor Vision and old Konka models (no version number to tap). XGIMI H3 needs a third-party tool to open ADB first.</p>
-      <p class="note"><b>TVs that only offer Wireless debugging (no USB/network debugging toggle) on Android 11 and later</b>, such as Sony BRAVIA on Android 14: wireless debugging pairs first; <code>adb connect &lt;TV-IP&gt;:5555</code> alone does not work. Open Wireless debugging → <b>Pair device with pairing code</b>, run <code>adb pair &lt;TV-IP&gt;:&lt;pairing-screen port&gt;</code> and type the 6-digit code, then <code>adb connect &lt;TV-IP&gt;:&lt;main-screen port&gt;</code> (the two ports differ), and install as usual. More in the <a href="https://github.com/orange-tv888/orange-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese); to use plain <code>&lt;TV-IP&gt;:5555</code> afterwards, run <code>adb tcpip 5555</code> once connected. Some TCL firmwares (Q10M, Q10L, Crane 6 Ultra and similar) have no pairing-code entry at all; there, authorize once over a USB cable instead, as the same guide explains.</p>
+      <p class="note"><b>TVs that only offer Wireless debugging (no USB/network debugging toggle) on Android 11 and later</b>, such as Sony BRAVIA on Android 14: wireless debugging pairs first; <code>adb connect &lt;TV-IP&gt;:5555</code> alone does not work. Open Wireless debugging → <b>Pair device with pairing code</b>, run <code>adb pair &lt;TV-IP&gt;:&lt;pairing-screen port&gt;</code> and type the 6-digit code, then <code>adb connect &lt;TV-IP&gt;:&lt;main-screen port&gt;</code> (the two ports differ), and install as usual. More in the <a href="https://github.com/donut-tv888/donut-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese); to use plain <code>&lt;TV-IP&gt;:5555</code> afterwards, run <code>adb tcpip 5555</code> once connected. Some TCL firmwares (Q10M, Q10L, Crane 6 Ultra and similar) have no pairing-code entry at all; there, authorize once over a USB cable instead, as the same guide explains.</p>
 
       <h3 class="step"><span>2</span>Enter the TV's IP address</h3>
       <p class="hint">It's under Settings → Network → the connected network (at the bottom on OPPO S1). Your computer must be on the same network.</p>
@@ -254,13 +254,13 @@
       <div class="panel" data-panel="cli">
         <p>Run it in a macOS or Linux terminal; it downloads adb if you don't have it. On Windows, use an agent.</p>
         <div class="code"><button class="copy" data-copy="cmd">Copy</button><pre id="cmd"></pre></div>
-        <p class="note">TVs that only offer Wireless debugging pair first: with a pairing-code entry, set the <code>ADB_PAIR</code>, <code>ADB_CODE</code> and <code>ADB_CONNECT</code> variables before running (the README shows how) and the script pairs and switches back to 5555 for you; without a pairing-code entry (TCL Q10M, Q10L, Crane 6 Ultra and similar), connect the TV once with a USB cable as in the <a href="https://github.com/orange-tv888/orange-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese) and run <code>adb tcpip 5555</code>.</p>
+        <p class="note">TVs that only offer Wireless debugging pair first: with a pairing-code entry, set the <code>ADB_PAIR</code>, <code>ADB_CODE</code> and <code>ADB_CONNECT</code> variables before running (the README shows how) and the script pairs and switches back to 5555 for you; without a pairing-code entry (TCL Q10M, Q10L, Crane 6 Ultra and similar), connect the TV once with a USB cable as in the <a href="https://github.com/donut-tv888/donut-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese) and run <code>adb tcpip 5555</code>.</p>
       </div>
 
       <div class="panel" data-panel="manual">
-        <p>Download <a href="https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk"><b>orange.apk</b></a>, then run:</p>
+        <p>Download <a href="https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk"><b>donut.apk</b></a>, then run:</p>
         <div class="code"><button class="copy" data-copy="manualcmd">Copy</button><pre id="manualcmd"></pre></div>
-        <p class="note">TVs that only offer Wireless debugging (step 1) come in two kinds:<br><b>With a pairing-code entry</b> (Sony BRAVIA on Android 14 and similar): pair first as in step 1, then run <code>adb tcpip 5555</code> once connected, so the first line of the commands is 5555; without that, use the IP:port from the main Wireless debugging screen on the first line.<br><b>Without a pairing-code entry</b> (TCL Q10M, Q10L, Crane 6 Ultra and similar): follow the <a href="https://github.com/orange-tv888/orange-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese) and connect the TV to a computer with a USB cable, then run <code>adb tcpip 5555</code> once authorized; until you do, the first line's <code>:5555</code> will not connect.</p>
+        <p class="note">TVs that only offer Wireless debugging (step 1) come in two kinds:<br><b>With a pairing-code entry</b> (Sony BRAVIA on Android 14 and similar): pair first as in step 1, then run <code>adb tcpip 5555</code> once connected, so the first line of the commands is 5555; without that, use the IP:port from the main Wireless debugging screen on the first line.<br><b>Without a pairing-code entry</b> (TCL Q10M, Q10L, Crane 6 Ultra and similar): follow the <a href="https://github.com/donut-tv888/donut-tv-update/blob/main/docs/devices/adb-by-brand.md">by-brand guide</a> (Chinese) and connect the TV to a computer with a USB cable, then run <code>adb tcpip 5555</code> once authorized; until you do, the first line's <code>:5555</code> will not connect.</p>
       </div>
 
       <div class="panel" data-panel="phone">
@@ -277,13 +277,13 @@
       <div class="panel" data-panel="usb">
         <p>No computer, and no need for steps 1 and 2 above: copy the APK to a USB drive, plug it into the TV, and open it with the TV's file manager to install.</p>
         <ul>
-          <li><a href="https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk"><b>orange.apk</b></a>: use this on Android 5.0 and later.</li>
+          <li><a href="https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk"><b>donut.apk</b></a>: use this on Android 5.0 and later.</li>
           <li>The guard build (the one that doesn't declare a home screen) and Donut TV Lite are not published separately: build them from the checkout with <code>./gradlew :app:assembleGuardRelease</code> or <code>:lite:assembleRelease</code>.</li>
         </ul>
         <p>Once it's installed, <b>press Home on the remote</b>. If Android asks which app to use, choose <b>Donut TV</b>, then <b>Always</b>, and you're done; stock Android TV usually works this way.</p>
         <p>If Home goes straight back to the old home screen without asking (most Chinese-brand TVs): open Donut TV from the app list. It shows "Make Donut TV Your Home Screen", whose entries open the TV's settings for the home guard (Accessibility) and notification access. If the TV's settings don't have them, Donut TV works only as an ordinary app opened from the app list; to take over Home, set it up once with a computer or an agent (it installs over, settings stay).</p>
         <p class="note">Whether Home, power-on and wake come back to Donut TV after a USB-only install depends on those entries being in the TV's settings; a computer install is the most reliable. Later updates: choose "New version" in Control Center, or install from the USB drive again.</p>
-        <p class="note">Donut TV Lite looks the same as the full app but has no Home Guard: once it's installed, press Home and choose <b>Donut TV Lite</b>, then Always; where the firmware keeps Home for its own launcher, open Lite from the app list. No aerial wallpaper, input tiles or in-app updates either (updating is installing again). To undo: Settings → Apps → Donut TV Lite → Clear defaults, or uninstall it. Report problems with the <a href="https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml">device support form</a>, with Lite in the title.</p>
+        <p class="note">Donut TV Lite looks the same as the full app but has no Home Guard: once it's installed, press Home and choose <b>Donut TV Lite</b>, then Always; where the firmware keeps Home for its own launcher, open Lite from the app list. No aerial wallpaper, input tiles or in-app updates either (updating is installing again). To undo: Settings → Apps → Donut TV Lite → Clear defaults, or uninstall it. Report problems with the <a href="https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml">device support form</a>, with Lite in the title.</p>
       </div>
 
 
@@ -305,7 +305,7 @@
 
       <h3 class="step"><span>2</span>Send it in from your phone</h3>
       <p>Control Center → Personalize, scan the QR code, and at the bottom of the phone page choose <b>Report a Problem → Show Diagnostics → Report on GitHub</b>: the model and the version fill the form, and the diagnostics are copied for you to paste.</p>
-      <p class="note">On a computer: <code>curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/report.sh | TV=&lt;tv-ip&gt; bash</code> (reads only) and <code>curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/selftest.sh | TV=&lt;tv-ip&gt; bash</code> (presses Home and checks Donut TV comes back), then paste both into the <a href="https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml">device support form</a>. The diagnostics hold no accounts, addresses, Wi-Fi names or app lists.</p>
+      <p class="note">On a computer: <code>curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=&lt;tv-ip&gt; bash</code> (reads only) and <code>curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/selftest.sh | TV=&lt;tv-ip&gt; bash</code> (presses Home and checks Donut TV comes back), then paste both into the <a href="https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml">device support form</a>. The diagnostics hold no accounts, addresses, Wi-Fi names or app lists.</p>
     </div>
   </div>
 </section>
@@ -322,7 +322,7 @@
         <summary>Can it break my TV? How do I undo it?</summary>
         <p>No. Donut TV doesn't touch system apps; it grants itself a few permissions and changes the home screen and screensaver settings, and all of that can be undone. The easiest way is to paste the text below into an AI that can run commands on a computer (the same kind you installed with): it follows the Undo section of the <a href="agent.md">install guide</a>, undoes every change and leaves the TV on its original home screen. Add "and uninstall Donut TV as well" to also remove it.</p>
         <div class="code"><button class="copy" data-copy="restoreprompt">Copy</button><pre id="restoreprompt"></pre></div>
-        <p>By hand: replace the final <code>bash</code> in the one-line command with <code>bash -s restore</code>, that is <code>curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=&lt;TV-IP&gt; bash -s restore</code>; add <code>--uninstall</code> to remove Donut TV too. On Windows without bash, the commands one by one are in the <a href="agent.md">install guide</a>.</p>
+        <p>By hand: replace the final <code>bash</code> in the one-line command with <code>bash -s restore</code>, that is <code>curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=&lt;TV-IP&gt; bash -s restore</code>; add <code>--uninstall</code> to remove Donut TV too. On Windows without bash, the commands one by one are in the <a href="agent.md">install guide</a>.</p>
       </details>
       <details>
         <summary>My firmware won't install home-screen apps?</summary>
@@ -358,7 +358,7 @@
       </details>
       <details>
         <summary>Will it work on my TV?</summary>
-        <p>Check the <a href="https://github.com/orange-tv888/orange-tv-update/blob/main/README.en.md#supported-tvs">list</a>. If yours isn't there, probably. Stock Android TV and Google TV are the easiest. LG webOS, Samsung Tizen and Huawei Vision (HarmonyOS) run different systems and can't take Donut TV; Android 4.0-4.4 TVs get Donut TV Lite (a beta, see USB drive under Install; the agent and the one-line command install it on their own); older ones are not supported. Some TVs can't open ADB at all, such as old LeTV sets, Honor Vision and old Konka models (no version number to tap). Slow or low-memory TVs pick Lite effects on their own; you can also choose it in Personalize → Effects. If something goes wrong, see <a href="#adapt">Installed, but something is off?</a> above.</p>
+        <p>Check the <a href="https://github.com/donut-tv888/donut-tv-update/blob/main/README.en.md#supported-tvs">list</a>. If yours isn't there, probably. Stock Android TV and Google TV are the easiest. LG webOS, Samsung Tizen and Huawei Vision (HarmonyOS) run different systems and can't take Donut TV; Android 4.0-4.4 TVs get Donut TV Lite (a beta, see USB drive under Install; the agent and the one-line command install it on their own); older ones are not supported. Some TVs can't open ADB at all, such as old LeTV sets, Honor Vision and old Konka models (no version number to tap). Slow or low-memory TVs pick Lite effects on their own; you can also choose it in Personalize → Effects. If something goes wrong, see <a href="#adapt">Installed, but something is off?</a> above.</p>
       </details>
     </div>
   </div>
@@ -370,7 +370,7 @@
       Donut TV is an independent open-source project (MIT), not affiliated with Apple, Xiaomi, TCL, Haier, OPPO or Sony; brand logos belong to their owners.<br>
       Donut TV films © Apple. Daily photos from Bing, © their respective owners.
     </div>
-    <div><a href="https://github.com/orange-tv888/orange-tv-update">GitHub</a> · <a href="https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk">Download</a> · <a href="https://github.com/orange-tv888/orange-tv-update/issues">Feedback</a> · <a href="../" data-lang="zh" lang="zh-CN">中文</a></div>
+    <div><a href="https://github.com/donut-tv888/donut-tv-update">GitHub</a> · <a href="https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk">Download</a> · <a href="https://github.com/donut-tv888/donut-tv-update/issues">Feedback</a> · <a href="../" data-lang="zh" lang="zh-CN">中文</a></div>
   </div>
 </footer>
 
@@ -388,7 +388,7 @@ TV IP address: ${ip}
 Keep ADB debugging on: ${keep ? 'yes' : 'no'}
 
 The install guide is here: ${guide}
-(If you can't open it, use https://ghfast.top/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/en/agent.md)
+(If you can't open it, use https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md)
 
 Read the whole guide before you start. Then run the commands yourself on my computer; don't just tell me the steps. Tell me when I need to do something on the TV.
 At the end, paste the raw output of these commands from the "Check" section, not just "it worked":

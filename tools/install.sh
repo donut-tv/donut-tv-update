@@ -9,7 +9,7 @@
 #   TV=<tv-ip> tools/install.sh lite          # Donut TV Lite; chosen by itself on Android 4.0-4.4,
 #                                             # refused on 5.0+ (FORCE_LITE=1 to try it there)
 #
-# The APK comes from this repository (update/orange.apk on main, else jsDelivr's copy), so only adb
+# The APK comes from this repository (update/donut.apk on main, else jsDelivr's copy), so only adb
 # is needed (and python3 on TCL TVs).
 #   BUILD=1        build it from this checkout instead (JDK 17 + Android SDK)
 #   APK_FILE=<apk> install this file instead
@@ -33,9 +33,9 @@ set -euo pipefail
 cd "$(dirname "$0")/.."
 
 : "${TV:?set TV to the TV IP address, e.g. TV=<tv-ip> $0}"
-# 26.5.6 拆仓：源码仓 orange--tv 已转 Private，APK 只从公开的更新仓下载。
-# 这里只用于拉 update/orange.apk；别改回源码仓，否则匿名下载 404。
-REPO=orange-tv888/orange-tv-update
+# 26.5.6 拆仓：源码仓 donut-tv 已转 Private，APK 只从公开的更新仓下载。
+# 这里只用于拉 update/donut.apk；别改回源码仓，否则匿名下载 404。
+REPO=donut-tv888/donut-tv-update
 command -v adb >/dev/null || { echo "adb not found. macOS: brew install android-platform-tools; Linux: install android-tools / adb." >&2; exit 1; }
 FLAVOR="${1:-standard}"
 case "$FLAVOR" in standard|guard|repair|lite) ;; *) echo "flavor must be standard, guard or lite (or repair)" >&2; exit 1 ;; esac
@@ -220,7 +220,7 @@ build() {
     echo "app/build/outputs/apk/$flavor/release/app-$flavor-release.apk"
   else
     local out="${TMPDIR:-/tmp}/orange-$flavor.apk" url
-    # Donut TV publishes one APK, update/orange.apk (the standard build). There is no downloadable
+    # Donut TV publishes one APK, update/donut.apk (the standard build). There is no downloadable
     # guard build, so that flavor says so instead of pulling a stranger's launcher. A Release page
     # does exist (GitHub Actions publishes it), but this path is the permanent latest APK link.
     if [ "$flavor" != standard ]; then
@@ -228,9 +228,9 @@ build() {
       return 1
     fi
     # jsDelivr was the old second choice; it is unreachable in China (HTTP 000, 2026-11-11).
-    for url in "https://raw.githubusercontent.com/$REPO/main/update/orange.apk" \
-               "https://ghfast.top/https://raw.githubusercontent.com/$REPO/main/update/orange.apk" \
-               "https://ghproxy.net/https://raw.githubusercontent.com/$REPO/main/update/orange.apk"; do
+    for url in "https://raw.githubusercontent.com/$REPO/main/update/donut.apk" \
+               "https://ghfast.top/https://raw.githubusercontent.com/$REPO/main/update/donut.apk" \
+               "https://ghproxy.net/https://raw.githubusercontent.com/$REPO/main/update/donut.apk"; do
       echo "Downloading $url" >&2
       # A slow proxy can answer 200 and drop the connection halfway, leaving a truncated APK
       # that curl still calls a success. An APK is a ZIP, so unzip -tq catches that before adb.
@@ -239,7 +239,7 @@ build() {
       echo "Incomplete or invalid APK from $url; trying the next mirror" >&2
       rm -f "$out"
     done
-    echo "Could not download orange.apk" >&2
+    echo "Could not download donut.apk" >&2
     return 1
   fi
 }

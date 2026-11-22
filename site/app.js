@@ -5,7 +5,7 @@
   // and the APK itself, since GitHub is slow or blocked in China. Anywhere else — a preview, or the
   // repo browsed on GitHub — point at this repository instead of anybody else's site.
   const onSite = location.protocol.startsWith('http') && !/github|localhost|127\.0\.0\.1/.test(location.hostname);
-  const RAW = 'https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main';
+  const RAW = 'https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main';
   const SITE = onSite ? location.origin : RAW;
   const SCRIPT = onSite ? `${SITE}/install.sh` : `${RAW}/tools/install.sh`;
   const GUIDE = onSite ? SITE + T.guide : RAW + '/site' + T.guide;
@@ -26,7 +26,7 @@
     $('#restoreprompt').textContent = T.restore(ip, GUIDE);
     $('#manualcmd').textContent =
 `adb connect ${ip}:5555
-adb install -r orange.apk
+adb install -r donut.apk
 adb shell pm grant app.orange.tv android.permission.WRITE_SECURE_SETTINGS
 adb shell cmd notification allow_listener app.orange.tv/app.orange.tv.guard.RevivalListener
 adb shell appops set app.orange.tv SYSTEM_ALERT_WINDOW allow

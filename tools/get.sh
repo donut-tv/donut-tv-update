@@ -2,7 +2,7 @@
 # One-line installer for people without a checkout: fetches tools/install.sh (and the TCL helper)
 # and runs it with the APK from this repository.
 #
-#   curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/get.sh | TV=<tv-ip> bash
+#   curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/get.sh | TV=<tv-ip> bash
 #   curl -fsSL .../get.sh | KEEP_ADB=1 TV=<tv-ip> bash      # TVs that switch ADB off (Xiaomi)
 #   curl -fsSL .../get.sh | TV=<tv-ip> bash -s guard        # firmwares that refuse launchers
 #   curl -fsSL .../get.sh | TV=<tv-ip> bash -s repair       # Home opens the TV's launcher again
@@ -19,7 +19,7 @@
 # ORANGE_REF=<branch> reads another branch; AERIAL_REF is still read for older scripts.
 set -euo pipefail
 : "${TV:?set TV to the TV IP address, e.g. curl ... | TV=192.168.1.20 bash}"
-REPO=orange-tv888/orange-tv-update
+REPO=donut-tv888/donut-tv-update
 REF="${ORANGE_REF:-${AERIAL_REF:-main}}"
 RAW="https://raw.githubusercontent.com/$REPO/$REF"
 MIRRORS=(

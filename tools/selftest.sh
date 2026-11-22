@@ -5,7 +5,7 @@
 # each input. Each check prints PASS / FAIL / SKIP with what it saw, and the end has a JSON block.
 #
 #   TV=<tv-ip> tools/selftest.sh
-#   curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/selftest.sh | TV=<tv-ip> bash
+#   curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/selftest.sh | TV=<tv-ip> bash
 #
 # Optional, each asks nothing and only runs when set:
 #   STANDBY=1  put the TV in standby for 70 s and wake it (Xiaomi turns ADB off in standby; the
@@ -217,4 +217,4 @@ echo '```'
 # Back on Donut TV, as the TV was before.
 sh_ am start -n "$PKG/.MainActivity" >/dev/null
 echo >&2
-echo "Saved to $OUT. Paste it with tools/report.sh's output into https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml" >&2
+echo "Saved to $OUT. Paste it with tools/report.sh's output into https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml" >&2

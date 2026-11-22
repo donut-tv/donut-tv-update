@@ -1,13 +1,13 @@
 # Installing Donut TV (for AI agents)
 
-You are helping the user install Donut TV (an open-source home screen for Android TV, https://github.com/orange-tv888/orange-tv-update) on their TV and make it the home screen the TV starts into. Android 5.0 and later get the full app, Android 4.0-4.4 get Donut TV Lite, decided by the Android version in step 2½. Everything goes through adb on the user's computer; the TV doesn't need root.
+You are helping the user install Donut TV (an open-source home screen for Android TV, https://github.com/donut-tv888/donut-tv-update) on their TV and make it the home screen the TV starts into. Android 5.0 and later get the full app, Android 4.0-4.4 get Donut TV Lite, decided by the Android version in step 2½. Everything goes through adb on the user's computer; the TV doesn't need root.
 
 ## Rules
 
 1. **Run the commands yourself on the user's computer.** Don't just list steps for the user. If you can't run commands (for example, you are a phone or web chat, including Doubao on a phone), say so and ask the user to switch to a desktop agent that can (Doubao for desktop or Doubao Work, WorkBuddy, Qwen for desktop, Claude Code, Codex, Cursor, Trae and similar), and to allow it to run commands and use the network the first time it asks.
 2. **Don't claim success you haven't seen.** Read the real output of every command, and finish with "Check" below, pasting the raw output to the user, including the home screen `resolve-activity` finds and what `enabled_accessibility_services` contains. Without those outputs, don't say it is installed.
 3. **Don't uninstall or disable any system app** (including the TV's own launcher), don't delete any file on the TV, and don't factory-reset it. The only file you may delete is `/sdcard/Download/Donut TV.apk`, if this install created it.
-4. **Install Donut TV and nothing else** (package `app.orange.tv`, or `app.orange.tv.lite` on Android 4.x), and download its APK only from `update/orange.apk` in this repository. Don't download or install any other app: no app stores (Dangbei and the like), no ADB enablers, no casting or cleaner tools, and no "Donut TV" APK from any other site. If these steps can't install it, stop and show the user the output; don't find another way to put something on the TV. People often install Donut TV to keep their TV clean, and any extra app works against them.
+4. **Install Donut TV and nothing else** (package `app.orange.tv`, or `app.orange.tv.lite` on Android 4.x), and download its APK only from `update/donut.apk` in this repository. Don't download or install any other app: no app stores (Dangbei and the like), no ADB enablers, no casting or cleaner tools, and no "Donut TV" APK from any other site. If these steps can't install it, stop and show the user the output; don't find another way to put something on the TV. People often install Donut TV to keep their TV clean, and any extra app works against them.
 5. Ask the user before rebooting the TV (`adb reboot`).
 6. When the user has to do something on the TV (allow debugging, accept an install), tell them exactly which remote buttons to press.
 7. If something fails, show the user the command and its exact output, then check "Common cases" below.
@@ -81,7 +81,7 @@ This step and "Check" are for Android 5.0 and later only.
 ### macOS / Linux: one command
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=<IP> bash
 ```
 
 The script downloads the latest release, installs it, grants permissions, takes over Home and the screensaver, and prints the result. Leave out `KEEP_ADB=1` if the user doesn't want Donut TV to keep ADB debugging on.
@@ -97,11 +97,11 @@ Run these in PowerShell, with the adb from step 1. Everything inside `adb shell 
 
 1. Download the APK:
    ```powershell
-   curl.exe -fL -o orange.apk https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk
+   curl.exe -fL -o donut.apk https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk
    ```
    If that fails, prefix the whole URL with `https://ghfast.top/` and try again; `https://ghproxy.net/` also works but is slower. Do not use jsDelivr — it is unreachable (tested 2026-11-11).
 
-2. Install it: `adb install -r orange.apk`. Go on when it prints `Success`. If it fails:
+2. Install it: `adb install -r donut.apk`. Go on when it prints `Success`. If it fails:
    - With **`INSTALL_FAILED_VERIFICATION_FAILURE`**: this is a TCL, which refuses every adb install. Follow "TCL" below, then continue from item 3.
    - With **`INSTALL_FAILED_USER_RESTRICTED`** (Skyworth and others): see the Skyworth entry under "Common cases", then install again.
    - With **`INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES`** or `INSTALL_FAILED_UPDATE_INCOMPATIBLE`: the Donut TV on the TV was signed with someone else's key and cannot be updated in place. Ask the owner first: uninstalling it (`adb uninstall app.orange.tv`) drops its settings, wallpapers and photos. Some firmwares (TCL, Android 5.1) exit 0 on a failed install, so go by the `Success` line only.
@@ -175,7 +175,7 @@ TCL installs only through the TV's own 多屏互动 (screen sharing) service, an
 mkdir orange-tcl; cd orange-tcl
 # There is no published guard build. Run ./gradlew :app:assembleGuardRelease in the
 # checkout, then copy app/build/outputs/apk/guard/release/app-guard-release.apk here as Donut TV.apk.
-curl.exe -fL -o tcast-push.py https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/tcast-push.py
+curl.exe -fL -o tcast-push.py https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/tcast-push.py
 adb reverse tcp:8765 tcp:8765
 Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1' -WindowStyle Hidden
 python tcast-push.py <IP> http://127.0.0.1:8765/Donut TV.apk app.orange.tv Donut TV 0 180
@@ -192,7 +192,7 @@ Only when the number from step 2½ is 14 to 20. Lite is at its first release (1.
 **macOS / Linux**: the same command as the full app; the script sees 4.x and installs Lite by itself:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash
 ```
 
 **Windows**, one at a time:
@@ -254,7 +254,7 @@ When everything is done, run `adb disconnect`: some TVs accept one device at a t
 macOS / Linux:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s restore
+curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s restore
 ```
 
 Add `--uninstall` (`bash -s restore --uninstall`) to remove Donut TV as well.
@@ -294,7 +294,7 @@ Then:
 - **TVs with only Wireless debugging** (FFALCON 55S595C Ultra, MT9655): adb can't be authorized there, so Donut TV installs but can't take over Home.
 - **Hisense VIDAA**: once item 7 has changed `persist.vt.use_home_pkg`, Home goes straight to Donut TV; the TV still starts into its own launcher after a reboot (the firmware holds third-party apps back until boot completes), so press Home once.
 - **Other Vidda systems, OPPO K9, FFALCON Crane 6**: Donut TV installs but the TV doesn't start into it (the firmware only accepts its own launcher unless that is removed, which this install doesn't do). Donut TV still works as an app.
-- **Check line 4 is 0 but line 3 lists Donut TV**: common right after an update, when the system still looks in the old install directory (Xiaomi, Android 9, #72). Run `adb shell am force-stop app.orange.tv`, wait 3 seconds, run `adb shell am start -W -n app.orange.tv/.MainActivity`, and check again. On macOS / Linux, `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s repair` does the same.
+- **Check line 4 is 0 but line 3 lists Donut TV**: common right after an update, when the system still looks in the old install directory (Xiaomi, Android 9, #72). Run `adb shell am force-stop app.orange.tv`, wait 3 seconds, run `adb shell am start -W -n app.orange.tv/.MainActivity`, and check again. On macOS / Linux, `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair` does the same.
 - **Home opens the TV's own launcher again after a while**: try the same stop-and-open first.
 - **Check line 4 is 0 and line 3 does not list Donut TV**: some firmwares block sideloaded accessibility services. Ask the user to allow Donut TV's autostart and accessibility in the TV's security or permissions app, then run `adb shell am start -n app.orange.tv/.MainActivity` and check again.
 - **Forgot the parental PIN**: `adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver --ez clear_pin true` turns it off.
@@ -306,6 +306,6 @@ Then:
 - **Can I still use the old home screen?** Yes. It stays in Donut TV's app list (including Xiaomi's PatchWall, opened from the 桌面 tile) and opens as before, with its recommendations. Xiaomi Video and PatchWall content are still there.
 - **Can it remove the boot ad?** No. The firmware plays it before Donut TV starts.
 - **How do I update later?** From 1.32, when Control Center shows New Version, choose Download and Install and confirm in the system installer (checked on Xiaomi). On TVs that do not let apps install apps, run the same install command again (on Windows, repeat items 1, 2, 3 and 6 of step 3); every setting is kept.
-- **Installed, but something is off (Home, standby, boot, inputs, brightness)**: follow https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/en/adapt.md to adapt Donut TV to this TV: self-test, fix what can be fixed on the TV, write up the rest.
-- **Something is wrong on the TV and the user wants to report it**: on macOS / Linux run `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/report.sh | TV=<IP> bash`. It only reads, and writes `orange-report-<model>.md`; read it, then paste it into https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml . Without a computer: scan the QR code in Personalize and use 反馈问题 (Report a problem) at the bottom of the phone page to copy the diagnostics.
-- **Where do I report problems?** https://github.com/orange-tv888/orange-tv-update/issues, with the TV model (`adb shell getprop ro.product.model`) and the install output.
+- **Installed, but something is off (Home, standby, boot, inputs, brightness)**: follow https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/adapt.md to adapt Donut TV to this TV: self-test, fix what can be fixed on the TV, write up the rest.
+- **Something is wrong on the TV and the user wants to report it**: on macOS / Linux run `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=<IP> bash`. It only reads, and writes `orange-report-<model>.md`; read it, then paste it into https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml . Without a computer: scan the QR code in Personalize and use 反馈问题 (Report a problem) at the bottom of the phone page to copy the diagnostics.
+- **Where do I report problems?** https://github.com/donut-tv888/donut-tv-update/issues, with the TV model (`adb shell getprop ro.product.model`) and the install output.

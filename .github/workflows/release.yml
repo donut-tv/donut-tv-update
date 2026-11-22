@@ -41,14 +41,14 @@ jobs:
           lines += [
               '',
               '## 安装',
-              '下载下方 `orange.apk` → U 盘或「小米电视助手」传到电视 → 允许未知来源 → 安装并设为默认桌面。',
+              '下载下方 `donut.apk` → U 盘或「小米电视助手」传到电视 → 允许未知来源 → 安装并设为默认桌面。',
               '已装过的电视：控制中心 → 关于与更新 → 检查更新，可直接升级。',
               '',
               'Windows / macOS / Linux 上也可以插着 ADB 一键安装：',
-              '`curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/get.sh | TV=<电视IP> bash`',
+              '`curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/get.sh | TV=<电视IP> bash`',
               '',
-              '安装前请读 [安装指引](https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/agent.md)。',
-              '指引打不开时用 https://ghfast.top/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/agent.md',
+              '安装前请读 [安装指引](https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md)。',
+              '指引打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md',
               '',
               '**让 Agent 装**：把本页链接，连同「请按上面的安装指引把 Donut TV 装到我的电视（IP：<电视IP>），完成后把验收的原始输出贴给我」，一起发给**能在电脑上运行命令**的 Agent（WorkBuddy、Claude Code、Trae、豆包电脑版等）。手机或网页版聊天只会列步骤，不会执行命令。',
           ]
@@ -65,14 +65,14 @@ jobs:
         run: |
           set -euo pipefail
           TAG="v${VER}"
-          cp update/orange.apk orange.apk
+          cp update/donut.apk donut.apk
           if gh release view "$TAG" >/dev/null 2>&1; then
             echo "Release $TAG already exists; refreshing its notes and APK"
             gh release edit "$TAG" --title "Donut TV ${VER}" --notes-file release-notes.md
-            gh release upload "$TAG" orange.apk --clobber
+            gh release upload "$TAG" donut.apk --clobber
           else
             echo "Creating Release $TAG"
-            gh release create "$TAG" orange.apk \
+            gh release create "$TAG" donut.apk \
               --target "${GITHUB_SHA}" \
               --title "Donut TV ${VER}" \
               --notes-file release-notes.md
