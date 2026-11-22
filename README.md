@@ -83,8 +83,8 @@ adb connect 192.168.1.20:39201   # 无线调试主页面上的另一组 IP:端�
 电视 IP：<电视IP>
 保持 ADB 常开：要
 
-安装说明在这里：https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md
-（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md ）
+安装说明在这里：https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md
+（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md ）
 
 请先完整读完安装说明再动手，然后在我的电脑上亲自运行命令，不要只把步骤告诉我。需要我在电视上操作时提醒我。
 最后按说明里的「验收」，把这几条命令的原始输出原样贴给我：
@@ -100,12 +100,12 @@ adb connect 192.168.1.20:39201   # 无线调试主页面上的另一组 IP:端�
 **一行命令（macOS / Linux）**：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=192.168.1.20 bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=192.168.1.20 bash
 ```
 
 只有无线调试的电视（见第 1 步）先 `export ADB_PAIR=<配对屏 IP:端口> ADB_CODE=<6 位配对码> ADB_CONNECT=<无线调试主页 IP:端口>`，再跑上面的命令；没有配对码入口的（TCL Q10M、Q10L、鹤 6 Ultra 等）先按[分品牌说明](docs/devices/adb-by-brand.md)用数据线连一次、运行 `adb tcpip 5555`，之后照常跑上面的命令。
 
-**手动**：下载 [donut.apk](https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk)。只有无线调试的电视（见第 1 步）按下面两种情况之一先处理好，再运行命令：
+**手动**：下载 [donut.apk](https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk)。只有无线调试的电视（见第 1 步）按下面两种情况之一先处理好，再运行命令：
 
 - **有配对码入口**（索尼 BRAVIA 的 Android 14 等）：按第 1 步配对，连上后运行一次 `adb tcpip 5555`，命令的第一行才用 5555；不运行的话，第一行换成无线调试主页面的 IP:端口，其余不变。
 - **没有配对码入口**（TCL Q10M、Q10L、鹤 6 Ultra 等）：按[分品牌说明](docs/devices/adb-by-brand.md)用数据线把电视连到电脑，授权后运行一次 `adb tcpip 5555`；没走这一步时，命令第一行的 `adb connect <电视IP>:5555` 不适用。
@@ -128,7 +128,7 @@ Windows 用 Agent 装，或照[安装说明](site/agent.md)里的 Windows 步骤
 
 | 下载 | 用在 |
 |---|---|
-| [donut.apk](https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk) | Android 5.0 及以上，装这个 |
+| [donut.apk](https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk) | Android 5.0 及以上，装这个 |
 | guard 版、Lite | 暂不单独发布；需要时从源码用 `BUILD=1` 构建（见 [docs/LITE.md](docs/LITE.md)） |
 
 装好后按主页键：系统问「使用哪个应用」时选 Donut TV、再选「始终」就设好了（原生 Android TV 一般是这样）。直接回到原桌面、不问（国产电视大多这样）时，从「我的应用」打开 Donut TV，它会弹出「设为主屏幕」，按里面的入口去电视设置里打开桌面守护（无障碍）和通知使用权；电视设置里没有这些入口时，Donut TV 只能当普通 App 用，要接管主页键还得用上面的命令或 Agent 设置一次（覆盖安装，不丢设置）。
@@ -141,12 +141,12 @@ Windows 用 Agent 装，或照[安装说明](site/agent.md)里的 Windows 步骤
 
 Android 4.0–4.4 的老电视、老盒子装不了完整版（界面框架最低要 Android 5.0），所以有一个单独的 **Donut TV Lite**：包名 `app.orange.tv.lite`，外观和完整版一样。
 
-> **Lite 现在是第一版（1.0），属于测试版。** 只在 Android 4.0.4 / 4.4.4 虚拟机，以及小米、TCL 的新电视上测过，还没在真实的 4.x 电视上用过，可能有不少小问题。**只适配 Android 4.0–4.4**；Android 5.0 及以上请用上面的完整版。遇到问题请用[机型适配模板](https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml)反馈，标题写上 Lite。
+> **Lite 现在是第一版（1.0），属于测试版。** 只在 Android 4.0.4 / 4.4.4 虚拟机，以及小米、TCL 的新电视上测过，还没在真实的 4.x 电视上用过，可能有不少小问题。**只适配 Android 4.0–4.4**；Android 5.0 及以上请用上面的完整版。遇到问题请用[机型适配模板](https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml)反馈，标题写上 Lite。
 
 **一行命令（macOS / Linux）**：和完整版是同一条命令，脚本发现电视是 Android 4.x 会自动装 Lite；也可以明确指定：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=192.168.1.20 bash -s lite
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=192.168.1.20 bash -s lite
 ```
 
 **手动**：Donut TV Lite 暂不单独发布，从源码 `./gradlew :lite:assembleRelease` 构建，然后：
@@ -169,7 +169,7 @@ adb shell am start -n app.orange.tv.lite/.HomeActivity
 ### 还原
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=192.168.1.20 bash -s restore
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=192.168.1.20 bash -s restore
 ```
 
 最后加 `--uninstall`（`bash -s restore --uninstall`）会顺便卸载 Donut TV。不能运行 bash（Windows）时，逐条的 adb 命令见[安装说明的「还原」](site/agent.md#还原)。
@@ -177,7 +177,7 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/to
 想交给 AI 还原，把这段直接发过去（要能在电脑上运行命令）：
 
 ```text
-请按 https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md 里「还原」一节的步骤，把我电视（IP：<电视IP>）的桌面还原成原来的，Donut TV 先不卸载。
+请按 https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md 里「还原」一节的步骤，把我电视（IP：<电视IP>）的桌面还原成原来的，Donut TV 先不卸载。
 请在我的电脑上亲自运行命令，最后把 settings get secure enabled_accessibility_services 和按主页键后的 dumpsys window | grep mCurrentFocus 原始输出贴给我。
 ```
 
@@ -267,7 +267,7 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/to
 **1. 交给 Agent（最省事）**：发给能在电脑上运行命令的 Agent。它会自检，能改的当场改好（比如信号源编号），最后整理成一份报告，你看过再提交。
 
 ```text
-请按 https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/adapt.md 给我的电视做 Donut TV 适配。
+请按 https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/adapt.md 给我的电视做 Donut TV 适配。
 电视 IP：<电视IP>
 哪里不对：<比如：按主页键回到原桌面 / HDMI 2 打开的是 HDMI 1 / 待机后停在原桌面>
 
@@ -276,9 +276,9 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/to
 最后把整理好的报告给我看，我同意后再提交到 GitHub。
 ```
 
-**2. 用手机提交**：控制中心 → 个性化，扫二维码，手机页最下面「反馈问题 → 显示诊断信息 → 去 GitHub 反馈」。型号和版本会自动填进[机型适配模板](https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml)，诊断信息自动复制，粘贴进去就行。
+**2. 用手机提交**：控制中心 → 个性化，扫二维码，手机页最下面「反馈问题 → 显示诊断信息 → 去 GitHub 反馈」。型号和版本会自动填进[机型适配模板](https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml)，诊断信息自动复制，粘贴进去就行。
 
-电脑上也可以自己跑：`curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=<电视IP> bash`（只读）和 `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/selftest.sh | TV=<电视IP> bash`（按主页键、打开设置，看 Donut TV 能不能回来），把两份输出贴进模板。诊断信息不含账号、IP、Wi-Fi 名称和 App 列表。你的电视能正常用，也欢迎用[实测可用模板](https://github.com/donut-tv888/donut-tv-update/issues/new?template=works.yml)告诉大家。
+电脑上也可以自己跑：`curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/report.sh | TV=<电视IP> bash`（只读）和 `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/selftest.sh | TV=<电视IP> bash`（按主页键、打开设置，看 Donut TV 能不能回来），把两份输出贴进模板。诊断信息不含账号、IP、Wi-Fi 名称和 App 列表。你的电视能正常用，也欢迎用[实测可用模板](https://github.com/donut-tv/donut-tv-update/issues/new?template=works.yml)告诉大家。
 
 ## 开发
 

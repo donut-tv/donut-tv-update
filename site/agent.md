@@ -1,6 +1,6 @@
 # Donut TV 安装说明（给 AI Agent）
 
-你在帮用户把 Donut TV（开源电视桌面，https://github.com/donut-tv888/donut-tv-update ）装到 Android 电视上，并让它成为开机进入的桌面。Android 5.0 及以上装完整版，Android 4.0–4.4 装 Donut TV Lite，由第 2½ 步的系统版本决定。整个过程通过电脑上的 adb 完成，电视不需要 root。
+你在帮用户把 Donut TV（开源电视桌面，https://github.com/donut-tv/donut-tv-update ）装到 Android 电视上，并让它成为开机进入的桌面。Android 5.0 及以上装完整版，Android 4.0–4.4 装 Donut TV Lite，由第 2½ 步的系统版本决定。整个过程通过电脑上的 adb 完成，电视不需要 root。
 
 ## 规则
 
@@ -81,7 +81,7 @@ Donut TV 有两个版本，**按第一条的数字选，只装对应的那一个
 ### macOS / Linux：一行命令
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=<IP> bash
 ```
 
 脚本会下载最新版、安装、授权、接管桌面和屏保，结尾打印结果。用户不想让 Donut TV 保持 ADB 常开时去掉 `KEEP_ADB=1`。
@@ -97,10 +97,10 @@ curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/to
 
 1. 下载 APK：
    ```powershell
-   curl.exe -fL -o donut.apk https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk
+   curl.exe -fL -o donut.apk https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk
    ```
    这个地址打不开时，在整个地址前面加 `https://ghfast.top/` 再试一次：
-   `https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/update/donut.apk`。
+   `https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/update/donut.apk`。
    还不行就把前缀换成 `https://ghproxy.net/`（慢一些）。不要用 jsDelivr，实测连不上。
 
 2. 安装：`adb install -r donut.apk`，输出 `Success` 继续。失败时：
@@ -177,7 +177,7 @@ TCL 只能通过电视自带的「多屏互动」安装，要用 guard 版。mac
 mkdir orange-tcl; cd orange-tcl
 # guard 版暂不单独发布。在源码目录跑 ./gradlew :app:assembleGuardRelease，
 # 再把 app/build/outputs/apk/guard/release/app-guard-release.apk 拷成本目录的 Donut TV.apk。
-curl.exe -fL -o tcast-push.py https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/tcast-push.py
+curl.exe -fL -o tcast-push.py https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/tcast-push.py
 adb reverse tcp:8765 tcp:8765
 Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1' -WindowStyle Hidden
 python tcast-push.py <IP> http://127.0.0.1:8765/Donut TV.apk app.orange.tv Donut TV 0 180
@@ -194,7 +194,7 @@ python tcast-push.py <IP> http://127.0.0.1:8765/Donut TV.apk app.orange.tv Donut
 **macOS / Linux**：和完整版是同一行命令，脚本看到 4.x 会自己装 Lite：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=<IP> bash
 ```
 
 **Windows** 逐条运行：
@@ -256,7 +256,7 @@ adb shell "sleep 8; dumpsys window | grep mCurrentFocus"
 macOS / Linux：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s restore
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s restore
 ```
 
 最后加 `--uninstall`（`bash -s restore --uninstall`）会顺便卸载 Donut TV。
@@ -296,7 +296,7 @@ adb shell cmd role remove-role-holder --user 0 android.app.role.HOME app.orange.
 - **雷鸟 55S595C Ultra（MT9655）等只有「无线调试」的机型**：拿不到授权，能装但接管不了主页键。
 - **海信 VIDAA**：第 7 步改了 `persist.vt.use_home_pkg` 以后，主页键直接进 Donut TV；但开机仍会先进聚好看（固件在开机完成前拦截第三方 App），按一次主页键即可。
 - **Vidda 其他系统、OPPO K9、雷鸟鹤 6**：能装，但开机进不了 Donut TV（固件只认自家桌面，除非删掉原桌面，这里不做）。可以把 Donut TV 当普通 App 用。
-- **验收第 4 条是 0，但第 3 条里有 Donut TV**：常见于升级之后，系统还在找旧的安装目录（小米 Android 9，#72）。运行 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新验收。macOS / Linux 也可以直接运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`。
+- **验收第 4 条是 0，但第 3 条里有 Donut TV**：常见于升级之后，系统还在找旧的安装目录（小米 Android 9，#72）。运行 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新验收。macOS / Linux 也可以直接运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`。
 - **用了一段时间后按主页键又回到原桌面**：同上，先试一次上面的强停再打开。
 - **验收第 4 条是 0，第 3 条里也没有 Donut TV**：有的固件拦截侧载的无障碍服务。请用户在电视的安全中心或权限管理里允许 Donut TV 自启动、无障碍，然后重新运行 `adb shell am start -n app.orange.tv/.MainActivity` 再验收。
 - **忘了家长密码**：`adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver --ez clear_pin true`，密码就关掉了。
@@ -308,6 +308,6 @@ adb shell cmd role remove-role-holder --user 0 android.app.role.HOME app.orange.
 - **原来的桌面还能用吗？** 能。原来的桌面作为一个 App 留在 Donut TV 的 App 列表里（小米的 PatchWall 也在，从「桌面」磁贴进入），打开就是原来的界面和推荐内容。小米影视、PatchWall 的内容都在。
 - **开机广告能去掉吗？** 不能。开机广告是固件在 Donut TV 启动之前播的。
 - **以后怎么升级？** 1.32 起，电视上控制中心出现「有新版本」时点「下载并安装」，在系统安装界面确认即可（小米上验证过）。电视不让 App 安装应用时，再运行一次同样的安装命令（Windows 重复第 3 步的 1、2、3、6 条），设置都会保留。
-- **装好了但有地方不对（主页键、待机、开机、信号源、亮度）**：按 https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/adapt.md 给这台电视做适配：自检、当场改能改的、整理成报告。
-- **电视上有问题，想反馈给作者**：macOS / Linux 运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=<IP> bash`，它只读不改，生成 `orange-report-<机型>.md`；读一遍，再贴进 https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml 。没有电脑时，用手机扫个性化里的二维码，在手机页底部「反馈问题」复制诊断信息。
-- **出问题去哪反馈？** https://github.com/donut-tv888/donut-tv-update/issues ，附上电视型号（`adb shell getprop ro.product.model`）和安装输出。
+- **装好了但有地方不对（主页键、待机、开机、信号源、亮度）**：按 https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/adapt.md 给这台电视做适配：自检、当场改能改的、整理成报告。
+- **电视上有问题，想反馈给作者**：macOS / Linux 运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/report.sh | TV=<IP> bash`，它只读不改，生成 `orange-report-<机型>.md`；读一遍，再贴进 https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml 。没有电脑时，用手机扫个性化里的二维码，在手机页底部「反馈问题」复制诊断信息。
+- **出问题去哪反馈？** https://github.com/donut-tv/donut-tv-update/issues ，附上电视型号（`adb shell getprop ro.product.model`）和安装输出。

@@ -71,7 +71,7 @@
   </div>
 
   <p class="note" data-t="keeps" style="margin:22px 4px 0"></p>
-  <p class="note" style="margin:8px 4px 0"><a href="https://github.com/donut-tv888/donut-tv-update/blob/main/update/version.json" data-t="notes"></a></p>
+  <p class="note" style="margin:8px 4px 0"><a href="https://github.com/donut-tv/donut-tv-update/blob/main/update/version.json" data-t="notes"></a></p>
 </main>
 <script>
 const T = {
@@ -87,8 +87,8 @@ const T = {
 `请帮我把电视上的开源桌面 Donut TV 升级到最新版。
 电视 IP：${tv}
 
-安装说明在这里：https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md
-（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md ）
+安装说明在这里：https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md
+（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md ）
 
 升级就是把安装再做一遍。请先完整读完安装说明再动手，然后在我的电脑上亲自运行命令，不要只把步骤告诉我。需要我在电视上操作时提醒我。
 最后按说明里的「验收」，把那几条命令的原始输出贴给我。`,
@@ -104,8 +104,8 @@ const T = {
 电视 IP：${tv}
 保持 ADB 常开：要
 
-安装说明在这里：https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md
-（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md ）
+安装说明在这里：https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md
+（打不开时用 https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md ）
 
 请先完整读完安装说明再动手，然后在我的电脑上亲自运行命令，不要只把步骤告诉我。需要我在电视上操作时提醒我。
 最后按说明里的「验收」，把那几条命令的原始输出贴给我。`,
@@ -124,8 +124,8 @@ const T = {
 `Please update Donut TV, the open-source home screen on my TV, to the latest version.
 TV IP: ${tv}
 
-The install guide is here: https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md
-(If it does not open: https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md )
+The install guide is here: https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md
+(If it does not open: https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md )
 
 Updating is installing again. Read the whole guide before you start, then run the commands on my computer yourself rather than telling me the steps. Tell me when I need to do something on the TV.
 Finally, follow the guide's Check step and paste me the raw output of those commands.`,
@@ -140,8 +140,8 @@ Finally, follow the guide's Check step and paste me the raw output of those comm
 TV IP: ${tv}
 Keep ADB on: yes
 
-The install guide is here: https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md
-(If it does not open: https://ghfast.top/https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md )
+The install guide is here: https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md
+(If it does not open: https://ghfast.top/https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md )
 
 Read the whole guide before you start, then run the commands on my computer yourself rather than telling me the steps. Tell me when I need to do something on the TV.
 Finally, follow the guide's Check step and paste me the raw output of those commands.`,
@@ -163,7 +163,7 @@ function render() {
   document.querySelectorAll('[data-t]').forEach(e => { e.textContent = t[e.dataset.t]; });
   $('#lang').textContent = t.lang;
   $('#sub').textContent = t.sub(version);
-  $('#cmd').textContent = `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=${ip} bash${guard}`;
+  $('#cmd').textContent = `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=${ip} bash${guard}`;
   $('#ai').textContent = t.ai(ip);
   $('#agents').replaceChildren(...t.agents.map(([icon, name]) => {
     const li = document.createElement('li');

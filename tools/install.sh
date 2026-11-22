@@ -35,7 +35,7 @@ cd "$(dirname "$0")/.."
 : "${TV:?set TV to the TV IP address, e.g. TV=<tv-ip> $0}"
 # 26.5.6 拆仓：源码仓 donut-tv 已转 Private，APK 只从公开的更新仓下载。
 # 这里只用于拉 update/donut.apk；别改回源码仓，否则匿名下载 404。
-REPO=donut-tv888/donut-tv-update
+REPO=donut-tv/donut-tv-update
 command -v adb >/dev/null || { echo "adb not found. macOS: brew install android-platform-tools; Linux: install android-tools / adb." >&2; exit 1; }
 FLAVOR="${1:-standard}"
 case "$FLAVOR" in standard|guard|repair|lite) ;; *) echo "flavor must be standard, guard or lite (or repair)" >&2; exit 1 ;; esac

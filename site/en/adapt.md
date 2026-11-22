@@ -1,8 +1,8 @@
 # Adapting Donut TV to a TV (for AI agents)
 
-Donut TV (an open-source TV launcher, https://github.com/donut-tv888/donut-tv-update ) is installed on the user's TV, but something is off: Home does not come back to Donut TV, standby or a restart ends on the old launcher, an input opens the wrong port, the brightness slider does nothing. Your job is to **find out on the TV what is wrong, fix on the spot what can be fixed, and write up the evidence for the rest** for the user to send to the maintainer, who has only two TVs.
+Donut TV (an open-source TV launcher, https://github.com/donut-tv/donut-tv-update ) is installed on the user's TV, but something is off: Home does not come back to Donut TV, standby or a restart ends on the old launcher, an input opens the wrong port, the brightness slider does nothing. Your job is to **find out on the TV what is wrong, fix on the spot what can be fixed, and write up the evidence for the rest** for the user to send to the maintainer, who has only two TVs.
 
-If Donut TV is not installed yet, install it first with https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md and pass its acceptance check.
+If Donut TV is not installed yet, install it first with https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md and pass its acceptance check.
 
 ## Rules
 
@@ -21,15 +21,15 @@ adb connect <IP>:5555
 adb devices
 ```
 
-The TV must show as `device`. For `unauthorized` or a failed connection, see steps 1 and 2 of https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/en/agent.md .
+The TV must show as `device`. For `unauthorized` or a failed connection, see steps 1 and 2 of https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/en/agent.md .
 
 ## Step 2: collect and self-test
 
 macOS / Linux (on Windows, in Git Bash or WSL):
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=<IP> bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/selftest.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/report.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/selftest.sh | TV=<IP> bash
 ```
 
 - `report.sh` only reads, and writes `orange-report-<model>.md`: model, firmware, Home and Home Guard state, inputs, log.
@@ -72,7 +72,7 @@ These are fixed on the spot, with no new release. Donut TV keeps each TV's corre
 
 ### Home does not come back (`home_on_orange` / `home_from_app` fail)
 
-1. `guard` failed too: Home Guard is not running. Run `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`, or `adb shell am force-stop app.orange.tv`, wait 3 s, `adb shell am start -W -n app.orange.tv/.MainActivity`, and test again.
+1. `guard` failed too: Home Guard is not running. Run `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`, or `adb shell am force-stop app.orange.tv`, wait 3 s, `adb shell am start -W -n app.orange.tv/.MainActivity`, and test again.
 2. `home_from_app` passed but took about 5 s: normal. Android handles the `input keyevent` Home itself and holds back app starts for 5 s after it; the remote's Home key is caught by Home Guard and does not wait.
 3. `guard` passed, `home_from_app` failed: ask the user to press Home on the real remote, then after 8 s run `adb shell "dumpsys window | grep mCurrentFocus"`. `input keyevent` skips Home Guard's key filter; the remote is what counts.
 4. Still not back: keep report.sh's "Home" and "Bound services" sections and `adb logcat -d -t 300 | grep -E "Donut TVGuard|ActivityTaskManager|ActivityManager"` after the key press for the maintainer.
@@ -85,7 +85,7 @@ These are fixed on the spot, with no new release. Donut TV keeps each TV's corre
 
 ### Restart (`reboot` fails)
 
-The self-test logs what was in front each second after boot. The old launcher first and Donut TV a few seconds later is normal; the old launcher after a minute means the firmware only accepts its own launcher (see https://github.com/donut-tv888/donut-tv-update/tree/main/docs/devices ). Do not disable it; send the timeline.
+The self-test logs what was in front each second after boot. The old launcher first and Donut TV a few seconds later is normal; the old launcher after a minute means the firmware only accepts its own launcher (see https://github.com/donut-tv/donut-tv-update/tree/main/docs/devices ). Do not disable it; send the timeline.
 
 ### Brightness slider does nothing
 
@@ -105,9 +105,9 @@ Once the user agrees:
 
 - With `gh` signed in (`gh auth status`):
   ```
-  gh issue create -R donut-tv888/donut-tv-update --title "[机型] <model>" --body-file orange-adapt-<model>.md
+  gh issue create -R donut-tv/donut-tv-update --title "[机型] <model>" --body-file orange-adapt-<model>.md
   ```
 - Without it, open this address (fill in and URL-encode the values); GitHub fills in the form, and the user pastes the file into Diagnostics:
   ```
-  https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml&title=[机型] <model>&model=<model>&version=Donut TV <version>&profile=<JSON>
+  https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml&title=[机型] <model>&model=<model>&version=Donut TV <version>&profile=<JSON>
   ```

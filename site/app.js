@@ -5,7 +5,7 @@
   // and the APK itself, since GitHub is slow or blocked in China. Anywhere else — a preview, or the
   // repo browsed on GitHub — point at this repository instead of anybody else's site.
   const onSite = location.protocol.startsWith('http') && !/github|localhost|127\.0\.0\.1/.test(location.hostname);
-  const RAW = 'https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main';
+  const RAW = 'https://raw.githubusercontent.com/donut-tv/donut-tv-update/main';
   const SITE = onSite ? location.origin : RAW;
   const SCRIPT = onSite ? `${SITE}/install.sh` : `${RAW}/tools/install.sh`;
   const GUIDE = onSite ? SITE + T.guide : RAW + '/site' + T.guide;

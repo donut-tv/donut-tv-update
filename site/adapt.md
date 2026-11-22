@@ -1,8 +1,8 @@
 # Donut TV 机型适配（给 AI Agent）
 
-Donut TV（开源电视桌面，https://github.com/donut-tv888/donut-tv-update ）已经装在用户的电视上，但有地方不对：按主页键回不到 Donut TV、待机或开机后停在原桌面、信号源打开的口不对、亮度条没反应等。你的任务是在用户的电视上**测出哪里不对、能改的当场改好、改不了的把证据整理好**，最后交给用户提交给作者。作者手上只有两台电视，其他品牌都靠你整理的结果。
+Donut TV（开源电视桌面，https://github.com/donut-tv/donut-tv-update ）已经装在用户的电视上，但有地方不对：按主页键回不到 Donut TV、待机或开机后停在原桌面、信号源打开的口不对、亮度条没反应等。你的任务是在用户的电视上**测出哪里不对、能改的当场改好、改不了的把证据整理好**，最后交给用户提交给作者。作者手上只有两台电视，其他品牌都靠你整理的结果。
 
-还没装好 Donut TV 时，先按 https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md 安装，并完成那里的「验收」。
+还没装好 Donut TV 时，先按 https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md 安装，并完成那里的「验收」。
 
 ## 规则
 
@@ -21,15 +21,15 @@ adb connect <IP>:5555
 adb devices
 ```
 
-后面是 `device` 才算连上。连不上、显示 `unauthorized` 时，按 https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/site/agent.md 的第 1、2 步处理。
+后面是 `device` 才算连上。连不上、显示 `unauthorized` 时，按 https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/site/agent.md 的第 1、2 步处理。
 
 ## 第 2 步：收集信息并自检
 
 macOS / Linux（Windows 在 Git Bash 或 WSL 里运行）：
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/report.sh | TV=<IP> bash
-curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/selftest.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/report.sh | TV=<IP> bash
+curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/selftest.sh | TV=<IP> bash
 ```
 
 - `report.sh` 只读，生成 `orange-report-<机型>.md`：机型、固件、桌面和守护的状态、信号源、日志。
@@ -76,7 +76,7 @@ adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigRec
 
 ### 按主页键回不到 Donut TV（`home_on_orange` / `home_from_app` 失败）
 
-1. 自检里 `guard` 也失败：守护没有运行。运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv888/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`，或者 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新自检。
+1. 自检里 `guard` 也失败：守护没有运行。运行 `curl -fsSL https://raw.githubusercontent.com/donut-tv/donut-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`，或者 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新自检。
 2. `home_from_app` 通过但要 5 秒左右：正常。`input keyevent` 模拟的主页键由 Android 自己处理，之后 5 秒内不许后台 App 打开界面；遥控器的主页键由守护直接接住，没有这个等待。
 3. `guard` 通过、`home_from_app` 失败：请用户用实体遥控器按一次主页键，8 秒后运行 `adb shell "dumpsys window | grep mCurrentFocus"`。`input keyevent` 不经过守护的按键过滤，少数电视上结果和遥控器不同，以遥控器为准。
 4. 遥控器也回不来：记下 `report.sh` 输出的「Home」和「Bound services」两节，以及按键后 `adb logcat -d -t 300 | grep -E "Donut TVGuard|ActivityTaskManager|ActivityManager"` 的输出，交给作者。
@@ -89,7 +89,7 @@ adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigRec
 
 ### 开机停在原桌面（`reboot` 失败）
 
-自检记下了开机后每秒在前台的包名。原桌面先出现、Donut TV 几秒后接管属于正常；一分钟后还是原桌面，就是固件只认自家桌面（OPPO K9、Vidda 等，见 https://github.com/donut-tv888/donut-tv-update/tree/main/docs/devices ）。这种情况不要停用原桌面，把时间线交给作者。
+自检记下了开机后每秒在前台的包名。原桌面先出现、Donut TV 几秒后接管属于正常；一分钟后还是原桌面，就是固件只认自家桌面（OPPO K9、Vidda 等，见 https://github.com/donut-tv/donut-tv-update/tree/main/docs/devices ）。这种情况不要停用原桌面，把时间线交给作者。
 
 ### 亮度条没反应
 
@@ -109,11 +109,11 @@ adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigRec
 
 - 电脑上装了 `gh` 并已登录（`gh auth status`）：
   ```
-  gh issue create -R donut-tv888/donut-tv-update --title "[机型] <型号>" --body-file orange-adapt-<机型>.md
+  gh issue create -R donut-tv/donut-tv-update --title "[机型] <型号>" --body-file orange-adapt-<机型>.md
   ```
 - 没有 `gh`：打开下面的地址（`<型号>`、`<版本>`、`<JSON>` 换成实际值，并做 URL 编码），GitHub 会预先填好表单；再请用户把 `orange-adapt-<机型>.md` 的全文粘贴到「诊断信息」一栏：
   ```
-  https://github.com/donut-tv888/donut-tv-update/issues/new?template=device.yml&title=[机型] <型号>&model=<型号>&version=Donut TV <版本>&profile=<JSON>
+  https://github.com/donut-tv/donut-tv-update/issues/new?template=device.yml&title=[机型] <型号>&model=<型号>&version=Donut TV <版本>&profile=<JSON>
   ```
 
 用户没有 GitHub 账号时，把文件交给用户，请用户发到作者的其他联系方式，或者请有账号的朋友代发。
