@@ -1,9 +1,9 @@
 {
-  "version": "26.6.3",
+  "version": "26.6.4",
   "apk": "https://ghproxy.net/https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/update/orange.apk",
   "notes": [
-    "夜览护眼：一键开系统护眼，看片不刺眼",
-    "夜览定时：每天固定时段自动开关护眼",
-    "遥控连接提示改白字，亮壁纸也看得清"
+    "改名为 Donut TV，图标换成甜甜圈",
+    "打赏页作者头像同步换成甜甜圈",
+    "英文壁纸分类名改为 Aerial"
   ]
 }
