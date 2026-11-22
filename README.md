@@ -11,7 +11,7 @@
 
 <a href="LICENSE"><img alt="许可证 MIT" src="https://img.shields.io/badge/%E8%AE%B8%E5%8F%AF%E8%AF%81-MIT-555555?style=flat-square"></a>
 <img alt="Android TV 5.0+" src="https://img.shields.io/badge/Android%20TV-5.0%2B-3ddc84?style=flat-square&logo=android&logoColor=white">
-<img alt="版本 26.6.4" src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-26.6.4-2997ff?style=flat-square">
+<img alt="版本 26.6.5" src="https://img.shields.io/badge/%E7%89%88%E6%9C%AC-26.6.5-2997ff?style=flat-square">
 
 ![Donut TV 首页](site/img/home.jpg)
 
