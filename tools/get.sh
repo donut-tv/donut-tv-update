@@ -7,12 +7,12 @@
 #   curl -fsSL .../get.sh | TV=<tv-ip> bash -s guard        # firmwares that refuse launchers
 #   curl -fsSL .../get.sh | TV=<tv-ip> bash -s repair       # Home opens the TV's launcher again
 #   curl -fsSL .../get.sh | TV=<tv-ip> bash -s restore      # give Home back to the TV's launcher
-#   (Android 4.0-4.4 gets Orange Lite by itself; `bash -s lite` asks for it and is refused on 5.0+)
+#   (Android 4.0-4.4 gets Donut TV Lite by itself; `bash -s lite` asks for it and is refused on 5.0+)
 #
 # Needs curl, unzip and python3 (TCL only). If adb is not installed, Google's platform-tools are
 # downloaded into ~/.cache/orange and used from there.
 #
-# There is no Orange download site any more: the scripts come from this repository. When
+# There is no Donut TV download site any more: the scripts come from this repository. When
 # raw.githubusercontent.com is slow or blocked, try the two GitHub proxies below (the same set
 # install.sh uses for the APK). jsDelivr was the old fallback but is unreachable in China
 # (2026-11-11: HTTP 000 / SSL_ERROR_SYSCALL), so do not put it back.

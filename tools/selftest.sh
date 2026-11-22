@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Try Orange on a TV the maintainer does not have, and write down what happened, for a GitHub
-# "机型适配 / Device support" issue. tools/report.sh says how the TV is set up; this says how Orange
-# behaves on it: Home from Orange and from another app, and on request standby, a restart and
+# Try Donut TV on a TV the maintainer does not have, and write down what happened, for a GitHub
+# "机型适配 / Device support" issue. tools/report.sh says how the TV is set up; this says how Donut TV
+# behaves on it: Home from Donut TV and from another app, and on request standby, a restart and
 # each input. Each check prints PASS / FAIL / SKIP with what it saw, and the end has a JSON block.
 #
 #   TV=<tv-ip> tools/selftest.sh
@@ -11,8 +11,8 @@
 #   STANDBY=1  put the TV in standby for 70 s and wake it (Xiaomi turns ADB off in standby; the
 #              script then asks for the remote's power key and waits for ADB to come back)
 #   REBOOT=1   restart the TV and follow what is in front for the first minute (ask the owner first)
-#   INPUTS=1   open each of Orange's inputs as its tile does, take a screenshot of each into
-#              orange-selftest-<model>/, and come back to Orange in between
+#   INPUTS=1   open each of Donut TV's inputs as its tile does, take a screenshot of each into
+#              orange-selftest-<model>/, and come back to Donut TV in between
 #
 # What it changes: it presses Home, opens the TV's settings, opens inputs, and with the options
 # above sleeps or restarts the TV. Nothing is installed, removed or written to settings. Read
@@ -46,11 +46,11 @@ fg() {
   printf '%s' "$w"
 }
 
-# After a PASS: whether Orange is still in front $1 seconds later. Some firmwares stop third-party
-# apps on Home, Orange too, a second after the guard brought it back (Dangbei H3S, issue #849).
+# After a PASS: whether Donut TV is still in front $1 seconds later. Some firmwares stop third-party
+# apps on Home, Donut TV too, a second after the guard brought it back (Dangbei H3S, issue #849).
 stays() { sleep "$1"; [ "$(fg)" = "$PKG" ]; }
 
-# Polls the foreground for up to $1 seconds; prints "<seconds> <package>" for the first time Orange
+# Polls the foreground for up to $1 seconds; prints "<seconds> <package>" for the first time Donut TV
 # is in front, or "- <package>" when it never is.
 wait_orange() {
   local start end p
@@ -65,7 +65,7 @@ wait_orange() {
 
 MODEL=$(sh_ getprop ro.product.model)
 VERSION=$(sh_ dumpsys package "$PKG" | grep -m1 versionName | sed 's/.*versionName=//')
-[ -n "$VERSION" ] || { echo "Orange ($PKG) is not installed on this TV." >&2; exit 1; }
+[ -n "$VERSION" ] || { echo "Donut TV ($PKG) is not installed on this TV." >&2; exit 1; }
 SLUG=$(printf '%s' "${MODEL:-tv}" | tr -c 'A-Za-z0-9._-' '_')
 OUT="orange-selftest-$SLUG.md"
 RESULTS=()
@@ -75,26 +75,26 @@ result() { # name, PASS|FAIL|SKIP, detail
 }
 
 {
-echo "### Orange self-test"
+echo "### Donut TV self-test"
 echo
-echo "$MODEL, Android $(sh_ getprop ro.build.version.release), Orange $VERSION, $(date '+%Y-%m-%d')"
+echo "$MODEL, Android $(sh_ getprop ro.build.version.release), Donut TV $VERSION, $(date '+%Y-%m-%d')"
 echo
 echo '```'
 
-# 1. Home Guard bound: everything below depends on it where Orange is not the default home.
+# 1. Home Guard bound: everything below depends on it where Donut TV is not the default home.
 ACC=$(sh_ settings get secure enabled_accessibility_services)
-BOUND=$(sh_ dumpsys accessibility | grep -c -E "label=(Orange|$PKG)")
+BOUND=$(sh_ dumpsys accessibility | grep -c -E "label=(Donut TV|$PKG)")
 # Android 6 and older have neither `cmd` nor `pm resolve-activity`; their "not found" and usage
 # text are not a Home (issue #818).
 HOME_TO=$(sh_ cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT | grep -E '^[A-Za-z0-9_.]+/[A-Za-z0-9_.$]+$' | tail -n1)
 [ -n "$HOME_TO" ] || HOME_TO=$(sh_ pm resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT | grep -E '^[A-Za-z0-9_.]+/[A-Za-z0-9_.$]+$' | tail -n1)
 [ -n "$HOME_TO" ] || HOME_TO="unknown (no cmd on this Android)"
-if [ "${HOME_TO%%/*}" = "$PKG" ]; then result guard PASS "Orange is the default home ($HOME_TO)"
+if [ "${HOME_TO%%/*}" = "$PKG" ]; then result guard PASS "Donut TV is the default home ($HOME_TO)"
 elif [ "${BOUND:-0}" -gt 0 ]; then result guard PASS "Home Guard bound; default home is $HOME_TO"
 elif printf '%s' "$ACC" | grep -q "$PKG/"; then result guard FAIL "Home Guard enabled but not bound; default home is $HOME_TO"
 else result guard FAIL "Home Guard not enabled ($ACC); default home is $HOME_TO"
 fi
-# What Orange needs to switch Home Guard on itself; an APK installed without install.sh has neither
+# What Donut TV needs to switch Home Guard on itself; an APK installed without install.sh has neither
 # (issue #853), and Android 13+ restricts one installed from a file (issues #811 #829).
 if [ "${HOME_TO%%/*}" != "$PKG" ] && [ "${BOUND:-0}" -eq 0 ]; then
   sh_ dumpsys package "$PKG" | grep -q "WRITE_SECURE_SETTINGS: granted=true" ||
@@ -103,15 +103,15 @@ if [ "${HOME_TO%%/*}" != "$PKG" ] && [ "${BOUND:-0}" -eq 0 ]; then
     echo "  (ACCESS_RESTRICTED_SETTINGS is denied: adb shell appops set $PKG ACCESS_RESTRICTED_SETTINGS allow)"
 fi
 
-# 2. Home on Orange itself.
+# 2. Home on Donut TV itself.
 sh_ am start -W -n "$PKG/.MainActivity" >/dev/null; sleep 2
 sh_ input keyevent KEYCODE_HOME
 read -r secs pkg <<<"$(wait_orange 8)"
 if [ "$secs" = "-" ]; then result home_on_orange FAIL "in front after 8 s: $pkg"
-elif stays 4; then result home_on_orange PASS "Orange in front"
-else result home_on_orange FAIL "Orange in front, then $(fg) 4 s later"
+elif stays 4; then result home_on_orange PASS "Donut TV in front"
+else result home_on_orange FAIL "Donut TV in front, then $(fg) 4 s later"
 fi
-# Home Guard's own answer to the key can come a second or two after Orange is already in front,
+# Home Guard's own answer to the key can come a second or two after Donut TV is already in front,
 # and it would cover the next app (TCL MT5879).
 sleep 3
 
@@ -119,7 +119,7 @@ sleep 3
 sh_ am start -a android.settings.SETTINGS >/dev/null; sleep 3
 OTHER=$(fg)
 # Some TVs' settings are a panel over the current app rather than an activity of their own: an
-# app from the launcher list instead, neither Orange nor the TV's own launcher.
+# app from the launcher list instead, neither Donut TV nor the TV's own launcher.
 if [ "$OTHER" = "$PKG" ]; then
   APP=$(sh_ cmd package query-activities --brief -a android.intent.action.MAIN -c android.intent.category.LAUNCHER |
     grep "/" | grep -v -e "^ *$PKG/" -e "^ *${HOME_TO%%/*}/" | head -n1 | tr -d ' ')
@@ -128,15 +128,15 @@ fi
 sh_ input keyevent KEYCODE_HOME
 read -r secs pkg <<<"$(wait_orange 12)"
 if [ "$OTHER" = "$PKG" ]; then result home_from_app SKIP "neither the settings nor another app came to front"
-elif [ "$secs" != "-" ] && stays 4; then result home_from_app PASS "from $OTHER, Orange in front after ${secs} s"
-elif [ "$secs" != "-" ]; then result home_from_app FAIL "from $OTHER, Orange in front after ${secs} s, then $(fg) 4 s later"
+elif [ "$secs" != "-" ] && stays 4; then result home_from_app PASS "from $OTHER, Donut TV in front after ${secs} s"
+elif [ "$secs" != "-" ]; then result home_from_app FAIL "from $OTHER, Donut TV in front after ${secs} s, then $(fg) 4 s later"
 else result home_from_app FAIL "from $OTHER, in front after 12 s: $pkg"
 fi
 sleep 3
 # input keyevent does not go through Home Guard's key filter; on some TVs (Sony, Android 9) the
 # remote's Home key behaves otherwise. A FAIL here is worth a try with the remote. Android also holds
 # back app starts for 5 s after a Home key it handles itself, so about 5 s here is that, not the
-# guard (TCL MT5879: the guard asks at once, Orange starts 5 s later; the remote's key is not held).
+# guard (TCL MT5879: the guard asks at once, Donut TV starts 5 s later; the remote's key is not held).
 
 # 4. Standby and wake.
 if [ "${STANDBY:-0}" = 1 ]; then
@@ -152,7 +152,7 @@ if [ "${STANDBY:-0}" = 1 ]; then
   if connect; then
     sleep 3
     read -r secs pkg <<<"$(wait_orange 60)"
-    [ "$secs" != "-" ] && result standby PASS "asleep=$WAKE, Orange in front ${secs} s after wake" || result standby FAIL "asleep=$WAKE, in front 60 s after wake: $pkg"
+    [ "$secs" != "-" ] && result standby PASS "asleep=$WAKE, Donut TV in front ${secs} s after wake" || result standby FAIL "asleep=$WAKE, in front 60 s after wake: $pkg"
   else result standby FAIL "ADB did not come back after wake; on Xiaomi, install with KEEP_ADB=1"
   fi
 else result standby SKIP "STANDBY=1 to try"
@@ -177,10 +177,10 @@ if [ "${REBOOT:-0}" = 1 ]; then
 else result reboot SKIP "REBOOT=1 to try (ask the owner first)"
 fi
 
-# 6. Inputs, as Orange lists them, with the TV's profile.
+# 6. Inputs, as Donut TV lists them, with the TV's profile.
 SOURCES=$(config --ez list_sources true)
-if [ -z "$SOURCES" ]; then result inputs SKIP "Orange older than 1.59 lists no inputs here"
-elif [ "$SOURCES" = "[]" ]; then result inputs SKIP "Orange finds no inputs on this TV"
+if [ -z "$SOURCES" ]; then result inputs SKIP "Donut TV older than 1.59 lists no inputs here"
+elif [ "$SOURCES" = "[]" ]; then result inputs SKIP "Donut TV finds no inputs on this TV"
 else
   N=$(printf '%s' "$SOURCES" | grep -o '"id"' | wc -l | tr -d ' ')
   if [ "${INPUTS:-0}" = 1 ]; then
@@ -203,7 +203,7 @@ fi
 echo '```'
 
 echo
-echo "**Inputs as Orange lists them**"
+echo "**Inputs as Donut TV lists them**"
 echo '```json'
 echo "${SOURCES:-[]}"
 echo '```'
@@ -214,7 +214,7 @@ printf '{"model":"%s","orange":"%s","checks":{%s}}\n' "$MODEL" "$VERSION" "$(IFS
 echo '```'
 } 2>&1 | tee "$OUT"
 
-# Back on Orange, as the TV was before.
+# Back on Donut TV, as the TV was before.
 sh_ am start -n "$PKG/.MainActivity" >/dev/null
 echo >&2
 echo "Saved to $OUT. Paste it with tools/report.sh's output into https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml" >&2

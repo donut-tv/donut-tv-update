@@ -1,14 +1,14 @@
-# Adapting Orange to a TV (for AI agents)
+# Adapting Donut TV to a TV (for AI agents)
 
-Orange (an open-source TV launcher, https://github.com/orange-tv888/orange-tv-update ) is installed on the user's TV, but something is off: Home does not come back to Orange, standby or a restart ends on the old launcher, an input opens the wrong port, the brightness slider does nothing. Your job is to **find out on the TV what is wrong, fix on the spot what can be fixed, and write up the evidence for the rest** for the user to send to the maintainer, who has only two TVs.
+Donut TV (an open-source TV launcher, https://github.com/orange-tv888/orange-tv-update ) is installed on the user's TV, but something is off: Home does not come back to Donut TV, standby or a restart ends on the old launcher, an input opens the wrong port, the brightness slider does nothing. Your job is to **find out on the TV what is wrong, fix on the spot what can be fixed, and write up the evidence for the rest** for the user to send to the maintainer, who has only two TVs.
 
-If Orange is not installed yet, install it first with https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/en/agent.md and pass its acceptance check.
+If Donut TV is not installed yet, install it first with https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/en/agent.md and pass its acceptance check.
 
 ## Rules
 
 1. **Run the commands yourself** on the user's computer and read their real output; never claim success you did not see. A chat-only agent should ask the user to switch to a desktop agent that can run commands.
 2. **Do not uninstall or disable any system app** (the old launcher included), delete files on the TV, factory-reset it, or change system settings not listed below.
-3. **Don't install any app other than Orange** (no app stores, ADB enablers or other tools). To reinstall or update Orange, use only `install.sh` below or `update/orange.apk` in this repository.
+3. **Don't install any app other than Donut TV** (no app stores, ADB enablers or other tools). To reinstall or update Donut TV, use only `install.sh` below or `update/orange.apk` in this repository.
 4. Ask the user before a standby test or a restart (`STANDBY=1`, `REBOOT=1`, `adb reboot`).
 5. Note the result before and after every switch you try; set back the ones that did not help.
 6. When the user has to look at the TV or press a key, say exactly what and which.
@@ -33,14 +33,14 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
 ```
 
 - `report.sh` only reads, and writes `orange-report-<model>.md`: model, firmware, Home and Home Guard state, inputs, log.
-- `selftest.sh` presses Home, opens the TV's settings, and checks that Orange comes back; it writes `orange-selftest-<model>.md` with `PASS`, `FAIL` or `SKIP` per check. With the user's consent, run it again with:
+- `selftest.sh` presses Home, opens the TV's settings, and checks that Donut TV comes back; it writes `orange-selftest-<model>.md` with `PASS`, `FAIL` or `SKIP` per check. With the user's consent, run it again with:
   - `STANDBY=1`: standby for 70 s, then wake; Xiaomi turns ADB off in standby, and the script asks for the remote's power key.
   - `REBOOT=1`: restart and log what is in front each second for the first minute.
-  - `INPUTS=1`: open each of Orange's inputs as its tile does, with a screenshot of each. HDMI often captures black; what the user sees counts.
+  - `INPUTS=1`: open each of Donut TV's inputs as its tile does, with a screenshot of each. HDMI often captures black; what the user sees counts.
 
 ## Step 3: what to do with a failed check
 
-Every switch goes through Orange's ADB receiver (only the ADB shell can send it):
+Every switch goes through Donut TV's ADB receiver (only the ADB shell can send it):
 
 ```
 adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver <arguments>
@@ -50,7 +50,7 @@ written `CONFIG <arguments>` below.
 
 ### Wrong inputs (wrong port, a port that is not there, wrong name)
 
-These are fixed on the spot, with no new release. Orange keeps each TV's corrections as a small JSON (the device profile), keyed by the input's hardware id (`.../HW5` is 5):
+These are fixed on the spot, with no new release. Donut TV keeps each TV's corrections as a small JSON (the device profile), keyed by the input's hardware id (`.../HW5` is 5):
 
 | Field | Does |
 |---|---|
@@ -75,7 +75,7 @@ These are fixed on the spot, with no new release. Orange keeps each TV's correct
 1. `guard` failed too: Home Guard is not running. Run `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`, or `adb shell am force-stop app.orange.tv`, wait 3 s, `adb shell am start -W -n app.orange.tv/.MainActivity`, and test again.
 2. `home_from_app` passed but took about 5 s: normal. Android handles the `input keyevent` Home itself and holds back app starts for 5 s after it; the remote's Home key is caught by Home Guard and does not wait.
 3. `guard` passed, `home_from_app` failed: ask the user to press Home on the real remote, then after 8 s run `adb shell "dumpsys window | grep mCurrentFocus"`. `input keyevent` skips Home Guard's key filter; the remote is what counts.
-4. Still not back: keep report.sh's "Home" and "Bound services" sections and `adb logcat -d -t 300 | grep -E "OrangeGuard|ActivityTaskManager|ActivityManager"` after the key press for the maintainer.
+4. Still not back: keep report.sh's "Home" and "Bound services" sections and `adb logcat -d -t 300 | grep -E "Donut TVGuard|ActivityTaskManager|ActivityManager"` after the key press for the maintainer.
 
 ### Standby (`standby` fails)
 
@@ -85,7 +85,7 @@ These are fixed on the spot, with no new release. Orange keeps each TV's correct
 
 ### Restart (`reboot` fails)
 
-The self-test logs what was in front each second after boot. The old launcher first and Orange a few seconds later is normal; the old launcher after a minute means the firmware only accepts its own launcher (see https://github.com/orange-tv888/orange-tv-update/tree/main/docs/devices ). Do not disable it; send the timeline.
+The self-test logs what was in front each second after boot. The old launcher first and Donut TV a few seconds later is normal; the old launcher after a minute means the firmware only accepts its own launcher (see https://github.com/orange-tv888/orange-tv-update/tree/main/docs/devices ). Do not disable it; send the timeline.
 
 ### Brightness slider does nothing
 
@@ -109,5 +109,5 @@ Once the user agrees:
   ```
 - Without it, open this address (fill in and URL-encode the values); GitHub fills in the form, and the user pastes the file into Diagnostics:
   ```
-  https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml&title=[机型] <model>&model=<model>&version=Orange <version>&profile=<JSON>
+  https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml&title=[机型] <model>&model=<model>&version=Donut TV <version>&profile=<JSON>
   ```

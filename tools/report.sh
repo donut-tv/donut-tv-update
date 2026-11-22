@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Collect what a maintainer needs to adapt Orange to a TV they do not have, as text to paste into
+# Collect what a maintainer needs to adapt Donut TV to a TV they do not have, as text to paste into
 # a GitHub issue (the "机型适配 / Device support" form).
 #
 #   TV=<tv-ip> tools/report.sh
 #   curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/report.sh | TV=<tv-ip> bash
 #
 # Writes orange-report-<model>.md in the current folder and prints it (on macOS also copies it).
-# Reads only: nothing on the TV is changed, except that Orange is started if it was not running,
+# Reads only: nothing on the TV is changed, except that Donut TV is started if it was not running,
 # for its own part of the report. Nothing personal is collected: no accounts, serial numbers,
 # Wi-Fi names, addresses or app lists; addresses in log lines are masked. Read the file before
 # posting it.
@@ -61,7 +61,7 @@ set +e
   echo '```'
 
   echo
-  echo "**Orange package**"
+  echo "**Donut TV package**"
   echo '```'
   sh_ dumpsys package "$PKG" | grep -E "versionName|versionCode|installerPackageName|lastUpdateTime|enabled=" | sed 's/^ *//' | sort -u
   echo "appops:"
@@ -77,7 +77,7 @@ set +e
     sh_ cmd package query-activities --brief "${HOME_INTENT[@]}" | sed 's/^/  /'
     sh_ cmd role get-role-holders android.app.role.HOME | sed 's/^/role holder: /'
   else
-    echo "resolves to: (no cmd on this Android; see Orange's own Home section below)"
+    echo "resolves to: (no cmd on this Android; see Donut TV's own Home section below)"
   fi
   echo "foreground: $(sh_ dumpsys activity activities | grep -m1 -E "mResumedActivity|topResumedActivity|mFocusedActivity" | sed 's/^ *//')"
   echo '```'
@@ -107,33 +107,33 @@ set +e
   echo "<details><summary>TV inputs</summary>"
   echo
   echo '```'
-  # Which HDMI port each hardware id is; Orange's part below lists the inputs themselves.
+  # Which HDMI port each hardware id is; Donut TV's part below lists the inputs themselves.
   sh_ dumpsys tv_input | grep -E "^ *TvInputHardwareInfo" | sed -E 's/^ *//' | sort -u | head -30 | mask
   echo '```'
   echo
   echo "</details>"
 
   echo
-  echo "<details><summary>logcat (Orange)</summary>"
+  echo "<details><summary>logcat (Donut TV)</summary>"
   echo
   echo '```'
-  # Orange's own tags, and the system services' lines about Orange (kills, bindings, installs).
+  # Donut TV's own tags, and the system services' lines about Donut TV (kills, bindings, installs).
   # Only these tags: other apps log all sorts about a package (Xiaomi's store logs the app list).
   sh_ logcat -d -v time -t 8000 \
-    | grep -E " [VDIWEF]/(Orange(Guard|Diag|Updates|Stream|Wallpaper|KonkaSources)|AndroidRuntime)\(| [VDIWEF]/(ActivityManager|ActivityTaskManager|NotificationListeners|AccessibilityManagerService|PackageManager|PackageInstaller)\(.*$PKG" \
+    | grep -E " [VDIWEF]/(Donut TV(Guard|Diag|Updates|Stream|Wallpaper|KonkaSources)|AndroidRuntime)\(| [VDIWEF]/(ActivityManager|ActivityTaskManager|NotificationListeners|AccessibilityManagerService|PackageManager|PackageInstaller)\(.*$PKG" \
     | cut -c1-400 | tail -n 250 | mask
   echo '```'
   echo
   echo "</details>"
   echo
 
-  # Orange's own part (Diagnostics.kt): what it sees from inside the app.
+  # Donut TV's own part (Diagnostics.kt): what it sees from inside the app.
   if ! sh_ pidof "$PKG" >/dev/null; then
     sh_ am start -n "$PKG/.MainActivity" >/dev/null
     sleep 4
   fi
-  APP=$(sh_ dumpsys activity "$PKG/.MainActivity" report | sed -n '/^### Orange diagnostics/,$p')
-  if [ -n "$APP" ]; then echo "$APP"; else echo "(Orange's own report is missing: Orange is older than 1.32 or is not running.)"; fi
+  APP=$(sh_ dumpsys activity "$PKG/.MainActivity" report | sed -n '/^### Donut TV diagnostics/,$p')
+  if [ -n "$APP" ]; then echo "$APP"; else echo "(Donut TV's own report is missing: Donut TV is older than 1.32 or is not running.)"; fi
 } > "$OUT"
 
 cat "$OUT"

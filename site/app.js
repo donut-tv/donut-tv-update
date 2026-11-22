@@ -60,7 +60,7 @@ adb shell am start -n app.orange.tv/.MainActivity`;
     b.textContent = T.copied; clearTimeout(b.timer); b.timer = setTimeout(() => b.textContent = T.copy, 1600);
   }));
 
-  // Before/after: the TV's own launcher on the right of the line, Orange on the left. The line
+  // Before/after: the TV's own launcher on the right of the line, Donut TV on the left. The line
   // follows the pointer while it is over the TV, eased so it glides rather than jumps.
   (() => {
     const box = $('#compare');
@@ -125,7 +125,7 @@ adb shell am start -n app.orange.tv/.MainActivity`;
     });
 
     set(0);
-    // The opening wipe takes the TV's launcher away and rests on Orange.
+    // The opening wipe takes the TV's launcher away and rests on Donut TV.
     if (reduced) { set(1); return; }
     const start = () => setTimeout(() => { if (!touched) wipe(1, 2200); }, 600);
     const seen = new IntersectionObserver(es => { if (es[0].isIntersecting) { seen.disconnect(); start(); } }, { threshold: 0.5 });

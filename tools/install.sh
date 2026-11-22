@@ -1,12 +1,12 @@
 #!/usr/bin/env bash
-# Install Orange on a TV over ADB and make it the home screen.
+# Install Donut TV on a TV over ADB and make it the home screen.
 #
 #   TV=<tv-ip> tools/install.sh               # standard build (declares HOME)
 #   TV=<tv-ip> tools/install.sh guard         # for firmwares that refuse to install a launcher
 #   TV=<tv-ip> tools/install.sh               # network ADB kept on by default (26.5.5)
 #   KEEP_ADB=0 TV=<tv-ip> tools/install.sh     # explicitly leave ADB alone
 #   TV=<tv-ip> tools/install.sh repair        # Home went back to the TV's launcher: restart Home Guard
-#   TV=<tv-ip> tools/install.sh lite          # Orange Lite; chosen by itself on Android 4.0-4.4,
+#   TV=<tv-ip> tools/install.sh lite          # Donut TV Lite; chosen by itself on Android 4.0-4.4,
 #                                             # refused on 5.0+ (FORCE_LITE=1 to try it there)
 #
 # The APK comes from this repository (update/orange.apk on main, else jsDelivr's copy), so only adb
@@ -18,11 +18,11 @@
 # Takeover, gentlest first. Nothing is uninstalled or disabled:
 #   1. Ask Android: HOME role / preferred home activity. Works on stock Android TV and Google TV.
 #   2. If the firmware pins Home to its own launcher anyway (Xiaomi PatchWall, TCL, most China-market
-#      firmware), Orange Home Guard takes over: an accessibility service that answers the Home key
+#      firmware), Donut TV Home Guard takes over: an accessibility service that answers the Home key
 #      and steps in front of the stock launcher. Firmwares that force-stop third-party apps on standby
-#      (Xiaomi) switch accessibility services off; a notification-listener binding brings Orange back
+#      (Xiaomi) switch accessibility services off; a notification-listener binding brings Donut TV back
 #      (or, where Android refuses listeners, a sync adapter about 30 s later: guard/RevivalSync.kt)
-#      and Orange switches the guard on again, which is what WRITE_SECURE_SETTINGS is granted for.
+#      and Donut TV switches the guard on again, which is what WRITE_SECURE_SETTINGS is granted for.
 #
 # Firmwares that block every ADB install (TCL's package verifier) get it through TCL's own 多屏互动,
 # with one confirmation on the TV; failing that, the APK is pushed to Download and installed through
@@ -115,14 +115,14 @@ fi
 # MiTV-MFTP0 (Android 9) kept the entry while system_server still pointed at the old APK directory
 # and never bound it (issue #72).
 # Some firmwares show the class name where the label goes (Xiaomi MiTV-ASTP0, Android 9, issue #183).
-guard_bound() { adb shell dumpsys accessibility 2>/dev/null | grep -q -E "label=(Orange|app\.orange\.tv)"; }
+guard_bound() { adb shell dumpsys accessibility 2>/dev/null | grep -q -E "label=(Donut TV|app\.orange\.tv)"; }
 
 wait_guard() {
   for _ in $(seq 1 "$1"); do sleep 1; guard_bound && return 0; done
   return 1
 }
 
-# Stopping Orange makes system_server load it afresh, from the APK that is really installed; the
+# Stopping Donut TV makes system_server load it afresh, from the APK that is really installed; the
 # guard is bound again when it starts (verified on MiTV-MFTP0, issue #72).
 restart_orange() {
   adb shell am force-stop "$PKG"
@@ -130,18 +130,18 @@ restart_orange() {
   adb shell am start -W -n "$PKG/.MainActivity" >/dev/null 2>&1 || true
 }
 
-# Grants that only ADB can give; Orange never asks for them on screen. Again on repair: an APK
+# Grants that only ADB can give; Donut TV never asks for them on screen. Again on repair: an APK
 # installed without this script has none of them, and Home Guard never came on (issue #853).
 grant() {
   adb shell pm grant "$PKG" android.permission.WRITE_SECURE_SETTINGS 2>/dev/null || true  # keep Home Guard (and ADB) on
-  adb shell appops set "$PKG" SYSTEM_ALERT_WINDOW allow 2>/dev/null || true             # open Orange after boot
+  adb shell appops set "$PKG" SYSTEM_ALERT_WINDOW allow 2>/dev/null || true             # open Donut TV after boot
   adb shell appops set "$PKG" WRITE_SETTINGS allow 2>/dev/null || true                  # brightness
   adb shell appops set "$PKG" REQUEST_INSTALL_PACKAGES allow 2>/dev/null || true        # update from Control Center
   # What is in front, where a launcher hides from accessibility (Xiaomi Android 6, issue #81).
   # Android 5 knows the op only by this name.
   adb shell appops set "$PKG" GET_USAGE_STATS allow 2>/dev/null || true
   adb shell appops set "$PKG" android:get_usage_stats allow 2>/dev/null || true
-  # Android 13 and later restrict an app installed from a file (a USB stick, a file manager, Orange's
+  # Android 13 and later restrict an app installed from a file (a USB stick, a file manager, Donut TV's
   # own update before 1.63): its accessibility service may not be switched on. Both TVs where Home
   # Guard kept going off had it denied (OBE R3 Ultra Max and TCL 75T7M Pro, Android 14, issues #811
   # #829). Older Android does not know the op, which is fine.
@@ -157,31 +157,31 @@ grant() {
   adb shell cmd notification allow_listener "$PKG/$PKG.guard.RevivalListener" 2>/dev/null || true  # come back after a kill
 }
 
-# Android 4.0-4.4 cannot run the full app (Jetpack Compose needs Android 5.0). Orange Lite is a
+# Android 4.0-4.4 cannot run the full app (Jetpack Compose needs Android 5.0). Donut TV Lite is a
 # separate package that declares HOME and has no Home Guard, so the owner picks it once in
 # Android's home chooser (docs/LITE.md). Nothing else from the steps below applies.
 # Each build is refused on the other side of 5.0: Android rejects the full app below 5.0 by itself,
 # but nothing stops Lite (minSdk 14) on a newer TV, where it would add a second HOME candidate next
-# to Orange and the stock launcher. FORCE_LITE=1 is for trying Lite on a new TV (docs/LITE.md).
+# to Donut TV and the stock launcher. FORCE_LITE=1 is for trying Lite on a new TV (docs/LITE.md).
 SDK=$(adb shell getprop ro.build.version.sdk 2>/dev/null | tr -d '\r')
 OLD_ANDROID=0
 [ -n "$SDK" ] && [ "$SDK" -lt 21 ] 2>/dev/null && OLD_ANDROID=1
 if [ "$FLAVOR" = lite ] && [ "$OLD_ANDROID" = 0 ] && [ "${FORCE_LITE:-0}" != 1 ]; then
-  echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'): Orange Lite is only for Android 4.0-4.4. Run the command without \"lite\" to install Orange." >&2
+  echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'): Donut TV Lite is only for Android 4.0-4.4. Run the command without \"lite\" to install Donut TV." >&2
   exit 1
 fi
 if [ "$OLD_ANDROID" = 1 ] && [ -n "${1:-}" ] && [ "$FLAVOR" != lite ]; then
-  echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'), and Orange needs 5.0 or newer. Run the command without \"$FLAVOR\" to install Orange Lite, the version for Android 4.0-4.4." >&2
+  echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'), and Donut TV needs 5.0 or newer. Run the command without \"$FLAVOR\" to install Donut TV Lite, the version for Android 4.0-4.4." >&2
   exit 1
 fi
 if [ "$FLAVOR" = lite ] || [ "$OLD_ANDROID" = 1 ]; then
   LITE=app.orange.tv.lite
-  [ "$FLAVOR" = lite ] || echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'): installing Orange Lite, the version for Android 4.0-4.4 (first release, a beta)."
+  [ "$FLAVOR" = lite ] || echo "This TV runs Android $(adb shell getprop ro.build.version.release | tr -d '\r'): installing Donut TV Lite, the version for Android 4.0-4.4 (first release, a beta)."
   if [ -n "${APK_FILE:-}" ]; then APK=$APK_FILE
   else
     # Lite is not published (docs/release/CHECKLIST.md B6): there is no download to fall back on,
     # so build it from this checkout.
-    echo "Orange Lite is not published; building it from this checkout." >&2
+    echo "Donut TV Lite is not published; building it from this checkout." >&2
     ./gradlew -q --console=plain :lite:assembleRelease
     APK=lite/build/outputs/apk/release/lite-release.apk
   fi
@@ -194,18 +194,18 @@ if [ "$FLAVOR" = lite ] || [ "$OLD_ANDROID" = 1 ]; then
   adb shell pm grant "$LITE" android.permission.WRITE_SECURE_SETTINGS >/dev/null 2>&1 || true
   adb shell am start -n "$LITE/.HomeActivity" >/dev/null 2>&1 || true
   echo
-  echo "Orange Lite is installed and open. Press Home on the remote; when Android asks which app to use,"
-  echo "choose Orange Lite, then Always. If no question comes and the old launcher opens, the firmware"
-  echo "keeps Home for its own launcher: open Orange Lite from the app list instead."
+  echo "Donut TV Lite is installed and open. Press Home on the remote; when Android asks which app to use,"
+  echo "choose Donut TV Lite, then Always. If no question comes and the old launcher opens, the firmware"
+  echo "keeps Home for its own launcher: open Donut TV Lite from the app list instead."
   exit 0
 fi
 
 if [ "$FLAVOR" = repair ]; then
-  adb shell pm path "$PKG" >/dev/null 2>&1 || { echo "Orange is not installed on this TV." >&2; exit 1; }
+  adb shell pm path "$PKG" >/dev/null 2>&1 || { echo "Donut TV is not installed on this TV." >&2; exit 1; }
   grant
   restart_orange
   if wait_guard 8; then echo "Home Guard is running again. Press Home on the remote."; exit 0; fi
-  echo "Orange is open, but Home Guard is not running. Run the install command again." >&2
+  echo "Donut TV is open, but Home Guard is not running. Run the install command again." >&2
   exit 1
 fi
 
@@ -220,7 +220,7 @@ build() {
     echo "app/build/outputs/apk/$flavor/release/app-$flavor-release.apk"
   else
     local out="${TMPDIR:-/tmp}/orange-$flavor.apk" url
-    # Orange publishes one APK, update/orange.apk (the standard build). There is no downloadable
+    # Donut TV publishes one APK, update/orange.apk (the standard build). There is no downloadable
     # guard build, so that flavor says so instead of pulling a stranger's launcher. A Release page
     # does exist (GitHub Actions publishes it), but this path is the permanent latest APK link.
     if [ "$flavor" != standard ]; then
@@ -270,12 +270,12 @@ tcast_install() {
   local apk=$1 want=$2 dir srv rc=0
   nc -z -G 3 "${SERIAL%%:*}" 6553 >/dev/null 2>&1 || return 1
   dir=$(mktemp -d)
-  cp "$apk" "$dir/Orange.apk"
+  cp "$apk" "$dir/Donut TV.apk"
   python3 -m http.server 8765 --bind 127.0.0.1 --directory "$dir" >/dev/null 2>&1 &
   srv=$!
   adb reverse tcp:8765 tcp:8765 >/dev/null
-  echo "Pushing Orange through 多屏互动. On the TV, choose 同意 (Agree)."
-  python3 tools/tcast-push.py "${SERIAL%%:*}" http://127.0.0.1:8765/Orange.apk "$PKG" Orange "${want:-0}" 180 || rc=$?
+  echo "Pushing Donut TV through 多屏互动. On the TV, choose 同意 (Agree)."
+  python3 tools/tcast-push.py "${SERIAL%%:*}" http://127.0.0.1:8765/Donut TV.apk "$PKG" Donut TV "${want:-0}" 180 || rc=$?
   adb reverse --remove tcp:8765 >/dev/null 2>&1 || true
   { kill "$srv" && wait "$srv"; } 2>/dev/null || true
   rm -rf "$dir"
@@ -302,16 +302,16 @@ if [ "$RC" -ne 0 ] || ! printf '%s\n' "$OUT" | grep -q Success; then
         TCAST_OK=1
       else
         # No 多屏互动: put the APK in Download and install it on the TV itself.
-        adb shell rm -f /sdcard/Download/Orange.apk
-        adb push "$APK" /sdcard/Download/Orange.apk >/dev/null
+        adb shell rm -f /sdcard/Download/Donut TV.apk
+        adb push "$APK" /sdcard/Download/Donut TV.apk >/dev/null
         adb shell content call --uri content://media --method scan_volume --arg external_primary >/dev/null 2>&1 || true
-        echo "This TV only installs apps from the TV itself. Orange.apk is now in Download on the TV."
+        echo "This TV only installs apps from the TV itself. Donut TV.apk is now in Download on the TV."
         if adb shell pm path com.dangbeimarket >/dev/null 2>&1; then
           adb shell am start -n com.dangbeimarket/.ui.apkmanager.ApkManagerActivity >/dev/null 2>&1 || true
-          echo "Dangbei's package manager is open on the TV: choose Orange, then Install (confirm on the TV)."
+          echo "Dangbei's package manager is open on the TV: choose Donut TV, then Install (confirm on the TV)."
         else
           echo "Open it with a file manager or an app store's local install already on the TV, and confirm."
-          echo "Do not install another app (an app store or a tool) to do this: Orange is the only app this installs."
+          echo "Do not install another app (an app store or a tool) to do this: Donut TV is the only app this installs."
         fi
         echo -n "Waiting for the install"
         for _ in $(seq 1 120); do
@@ -320,11 +320,11 @@ if [ "$RC" -ne 0 ] || ! printf '%s\n' "$OUT" | grep -q Success; then
         done
         echo
       fi
-      [ "$TCAST_OK" = 1 ] || installed_now || { echo "Orange was not installed; nothing else was changed." >&2; exit 1; }
+      [ "$TCAST_OK" = 1 ] || installed_now || { echo "Donut TV was not installed; nothing else was changed." >&2; exit 1; }
       FLAVOR=guard
       ;;
     *INCONSISTENT_CERTIFICATES*|*UPDATE_INCOMPATIBLE*)
-      echo "The Orange on this TV is signed with another key (a build of someone else's), so it cannot be updated in place." >&2
+      echo "The Donut TV on this TV is signed with another key (a build of someone else's), so it cannot be updated in place." >&2
       echo "Uninstall it first (this drops its settings, wallpapers and photos): adb uninstall $PKG" >&2
       exit 1
       ;;
@@ -337,20 +337,20 @@ fi
 
 grant
 # Android 9 on Xiaomi MiTV-MFTP0 reports success but never binds it (issue #72): low-RAM devices
-# get no notification listeners at all. Orange's sync adapter brings it back there instead, later.
+# get no notification listeners at all. Donut TV's sync adapter brings it back there instead, later.
 if ! adb shell dumpsys notification 2>/dev/null | grep -q "$PKG/$PKG.guard.RevivalListener"; then
-  echo "Note: this TV refuses notification listeners. After the TV stops Orange (Xiaomi does at standby)," >&2
-  echo "Orange comes back through Android's sync service about 30-60 seconds later, not at once: after a" >&2
+  echo "Note: this TV refuses notification listeners. After the TV stops Donut TV (Xiaomi does at standby)," >&2
+  echo "Donut TV comes back through Android's sync service about 30-60 seconds later, not at once: after a" >&2
   echo "short standby the TV's launcher can show for up to a minute. Keep auto-sync on. If Home ever stays" >&2
   echo "on the TV's launcher: TV=$TV $0 repair" >&2
 fi
-# TVs on Android's standard screensaver (TCL's carries a membership upsell) get Orange's instead,
-# so it also starts while another app sits idle. Xiaomi uses its own; Orange covers it from Home.
+# TVs on Android's standard screensaver (TCL's carries a membership upsell) get Donut TV's instead,
+# so it also starts while another app sits idle. Xiaomi uses its own; Donut TV covers it from Home.
 if [ "$(adb shell settings get secure screensaver_enabled | tr -d '\r')" = 1 ]; then
-  adb shell settings put secure screensaver_components "$PKG/$PKG.dream.OrangeDream"
-  # Some firmwares (TCL) put their own back on every boot; Orange restores it when it starts.
+  adb shell settings put secure screensaver_components "$PKG/$PKG.dream.Donut TVDream"
+  # Some firmwares (TCL) put their own back on every boot; Donut TV restores it when it starts.
   adb shell am broadcast -a "$PKG.CONFIG" -n "$PKG/.guard.ConfigReceiver" --ez own_screensaver true >/dev/null
-  echo "Orange's screensaver is now the TV's screensaver."
+  echo "Donut TV's screensaver is now the TV's screensaver."
 fi
 # 26.5.5: keeping network ADB on is the DEFAULT (user 15:17 hard constraint). The old
 # KEEP_ADB=1 opt-in was never sent by releases that used `adb install -r`, so the mechanism
@@ -361,11 +361,11 @@ if [ "${KEEP_ADB:-1}" = 0 ]; then
 else
   adb shell am broadcast -a "$PKG.CONFIG" -n "$PKG/.guard.ConfigReceiver" \
     --ez keep_adb true --ez adb_tcp_known true >/dev/null
-  echo "ADB keep-alive ON by default: Orange restores adb_enabled and 5555 after a wake/reboot."
+  echo "ADB keep-alive ON by default: Donut TV restores adb_enabled and 5555 after a wake/reboot."
 fi
 
 if ! adb shell am start -W -n "$PKG/.MainActivity" | grep -q "Status: ok"; then
-  echo "Orange did not start; Home was left untouched." >&2
+  echo "Donut TV did not start; Home was left untouched." >&2
   exit 1
 fi
 
@@ -379,12 +379,12 @@ if nc -z -G 2 "$ADB_IP" 5555 2>/dev/null || nc -z -w 2 "$ADB_IP" 5555 2>/dev/nul
 else
   ADB_PORT=closed
 fi
-echo "ADB three-state self-check: ${ADB_STATE:-<no reply from Orange yet>}"
+echo "ADB three-state self-check: ${ADB_STATE:-<no reply from Donut TV yet>}"
 echo "ADB three-state self-check: 5555=$ADB_PORT (probed from this computer; SELinux stops the app from probing it)"
 
 # Compose runs much smoother ahead-of-time compiled on TV chips: Home's tiles show in about half the
-# time. After Orange's first start, not before: some firmwares compile "speed" as "speed-profile"
-# (Xiaomi MiTV-MFTR0, Android 14), which needs the profile Orange writes as it starts; compiled
+# time. After Donut TV's first start, not before: some firmwares compile "speed" as "speed-profile"
+# (Xiaomi MiTV-MFTR0, Android 14), which needs the profile Donut TV writes as it starts; compiled
 # straight after the install it was left interpreted ("verify").
 sleep 5
 adb shell cmd package compile -m speed -f "$PKG" >/dev/null 2>&1 || true
@@ -408,7 +408,7 @@ if [ "$FLAVOR" = standard ]; then
     adb shell settings put global orange_vt_home_pkg "$VT_HOME"
     adb shell settings delete global aerial_vt_home_pkg >/dev/null 2>&1 || true
     adb shell setprop persist.vt.use_home_pkg "$PKG"
-    echo "Hisense: Home now opens Orange instead of $VT_HOME."
+    echo "Hisense: Home now opens Donut TV instead of $VT_HOME."
   fi
   # Not on Xiaomi (PatchWall, com.mitv.tvhome installed): most firmwares ignore it, but one Android 9
   # set took it, PatchWall then ran as an ordinary app outside the home stack, and Xiaomi's short
@@ -421,13 +421,13 @@ if [ "$FLAVOR" = standard ]; then
   HOME_NOW=$(resolve_home)
   case "$HOME_NOW" in
     "$PKG"/*)
-      echo "Orange is the home screen ($HOME_NOW)."
+      echo "Donut TV is the home screen ($HOME_NOW)."
       exit 0 ;;
   esac
-  echo "The firmware still sends Home to $HOME_NOW; turning on Orange Home Guard."
+  echo "The firmware still sends Home to $HOME_NOW; turning on Donut TV Home Guard."
 fi
 
-# Orange switches the guard on itself when it starts (it has WRITE_SECURE_SETTINGS by now). Do it
+# Donut TV switches the guard on itself when it starts (it has WRITE_SECURE_SETTINGS by now). Do it
 # here as well, appending to the list so no other service is dropped.
 CURRENT=$(adb shell settings get secure enabled_accessibility_services | tr -d '\r')
 case "$CURRENT" in
@@ -441,13 +441,13 @@ if wait_guard 6; then
   echo "Home Guard is running. Press Home on the remote."
   exit 0
 fi
-echo "Home Guard is enabled but Android has not started it; restarting Orange."
+echo "Home Guard is enabled but Android has not started it; restarting Donut TV."
 restart_orange
 if wait_guard 8; then
   echo "Home Guard is running. Press Home on the remote."
   exit 0
 fi
 echo "Home Guard is enabled but Android has not started it." >&2
-echo "Some TCL / Hisense firmwares block sideloaded accessibility services: allow Orange under the" >&2
+echo "Some TCL / Hisense firmwares block sideloaded accessibility services: allow Donut TV under the" >&2
 echo "TV's security app (自启动 / 无障碍 / 权限管理), then run this script again." >&2
 exit 1

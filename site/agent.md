@@ -1,13 +1,13 @@
-# Orange 安装说明（给 AI Agent）
+# Donut TV 安装说明（给 AI Agent）
 
-你在帮用户把 Orange（开源电视桌面，https://github.com/orange-tv888/orange-tv-update ）装到 Android 电视上，并让它成为开机进入的桌面。Android 5.0 及以上装完整版，Android 4.0–4.4 装 Orange Lite，由第 2½ 步的系统版本决定。整个过程通过电脑上的 adb 完成，电视不需要 root。
+你在帮用户把 Donut TV（开源电视桌面，https://github.com/orange-tv888/orange-tv-update ）装到 Android 电视上，并让它成为开机进入的桌面。Android 5.0 及以上装完整版，Android 4.0–4.4 装 Donut TV Lite，由第 2½ 步的系统版本决定。整个过程通过电脑上的 adb 完成，电视不需要 root。
 
 ## 规则
 
 1. **亲自在用户电脑上运行命令**，不要只把步骤列给用户。如果你不能执行命令（比如你是手机版或网页版聊天），直接告诉用户：请换成能执行命令的电脑版 Agent（WorkBuddy、豆包电脑版或豆包工作版、千问电脑版、Trae、Claude Code、Codex 等），并在第一次运行命令时允许它执行命令、访问网络。豆包手机版、网页版只会把步骤告诉用户，不会执行。
 2. **不要假装成功。** 每一步都看命令的真实输出；最后必须完成「验收」，把原始输出原样贴给用户，包括 `resolve-activity` 解析到的桌面和 `enabled_accessibility_services` 的内容。没有看到这些输出，就不能说装好了。
-3. **不要卸载、停用任何系统应用**（包括电视原来的桌面），不要删除电视上的任何文件，不要恢复出厂设置。只能删除这次安装自己创建的 `/sdcard/Download/Orange.apk`。
-4. **只安装 Orange**（包名 `app.orange.tv`，Android 4.x 上是 `app.orange.tv.lite`），APK 只从本仓库的 `update/orange.apk` 下载。不要下载、安装任何其他 App，包括应用商店（当贝市场等）、ADB 开启器、投屏或清理工具，也不要从别的网站找「Orange」的 APK。按这份说明装不上时，停下来把输出给用户看，不要另找办法往电视上装东西。用户装 Orange 往往就是想让电视干净，多出任何一个 App 都是在伤害用户。
+3. **不要卸载、停用任何系统应用**（包括电视原来的桌面），不要删除电视上的任何文件，不要恢复出厂设置。只能删除这次安装自己创建的 `/sdcard/Download/Donut TV.apk`。
+4. **只安装 Donut TV**（包名 `app.orange.tv`，Android 4.x 上是 `app.orange.tv.lite`），APK 只从本仓库的 `update/orange.apk` 下载。不要下载、安装任何其他 App，包括应用商店（当贝市场等）、ADB 开启器、投屏或清理工具，也不要从别的网站找「Donut TV」的 APK。按这份说明装不上时，停下来把输出给用户看，不要另找办法往电视上装东西。用户装 Donut TV 往往就是想让电视干净，多出任何一个 App 都是在伤害用户。
 5. 重启电视（`adb reboot`）前先征得用户同意。
 6. 需要用户在电视上操作时（允许调试、同意安装），明确告诉用户按遥控器的哪个键。
 7. 失败时把命令和输出原样给用户看，再对照下面的「常见情况」处理。
@@ -67,10 +67,10 @@ adb shell getprop ro.build.version.sdk
 adb shell getprop ro.build.version.release
 ```
 
-Orange 有两个版本，**按第一条的数字选，只装对应的那一个**：
+Donut TV 有两个版本，**按第一条的数字选，只装对应的那一个**：
 
-- **21 及以上**（Android 5.0+）：装完整版 Orange（包名 `app.orange.tv`），继续第 3 步。**不要装 `orange-lite.apk`**：系统不会拦它，但装上会多出一个桌面候选，可能让电视清掉现在的默认桌面。
-- **14–20**（Android 4.0–4.4）：装 Orange Lite（包名 `app.orange.tv.lite`），**跳过第 3 步和后面的「验收」**，改做下面的「Android 4.0–4.4：装 Orange Lite」。完整版在这些电视上装不上（`INSTALL_FAILED_OLDER_SDK`）。
+- **21 及以上**（Android 5.0+）：装完整版 Donut TV（包名 `app.orange.tv`），继续第 3 步。**不要装 `orange-lite.apk`**：系统不会拦它，但装上会多出一个桌面候选，可能让电视清掉现在的默认桌面。
+- **14–20**（Android 4.0–4.4）：装 Donut TV Lite（包名 `app.orange.tv.lite`），**跳过第 3 步和后面的「验收」**，改做下面的「Android 4.0–4.4：装 Donut TV Lite」。完整版在这些电视上装不上（`INSTALL_FAILED_OLDER_SDK`）。
 - **小于 14**（Android 3.x 及更老）：不支持，直接告诉用户。
 - **没有输出或报错**：先弄清原因（连接是否还在、`adb devices` 是否是 `device`），不要猜版本。
 
@@ -84,10 +84,10 @@ Orange 有两个版本，**按第一条的数字选，只装对应的那一个**
 curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | KEEP_ADB=1 TV=<IP> bash
 ```
 
-脚本会下载最新版、安装、授权、接管桌面和屏保，结尾打印结果。用户不想让 Orange 保持 ADB 常开时去掉 `KEEP_ADB=1`。
+脚本会下载最新版、安装、授权、接管桌面和屏保，结尾打印结果。用户不想让 Donut TV 保持 ADB 常开时去掉 `KEEP_ADB=1`。
 
 - 输出提示固件拒绝安装桌面类 App 时，在最后加 `-s guard` 再运行一次。
-- **TCL** 会显示「Pushing Orange through 多屏互动」：请用户看电视右上角的「多屏互动：正在发起应用推送」提示，**先按遥控器「右」选中「同意」，再按确认**。
+- **TCL** 会显示「Pushing Donut TV through 多屏互动」：请用户看电视右上角的「多屏互动：正在发起应用推送」提示，**先按遥控器「右」选中「同意」，再按确认**。
 
 跑完后去做「验收」。
 
@@ -106,7 +106,7 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
 2. 安装：`adb install -r orange.apk`，输出 `Success` 继续。失败时：
    - 输出里有 **`INSTALL_FAILED_VERIFICATION_FAILURE`**：这是 TCL，它拒绝一切 adb 安装。按下面「TCL 安装」处理，装好后从第 3 条继续。
    - 输出里有 **`INSTALL_FAILED_USER_RESTRICTED`**（创维等）：见「常见情况」里的创维一条，处理后再装。
-   - 输出里有 **`INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES`** 或 `INSTALL_FAILED_UPDATE_INCOMPATIBLE`：电视上的 Orange 是别人用另一把钥匙签的，不能覆盖。先问户主：卸载（`adb uninstall app.orange.tv`）会丢掉它的设置、壁纸和照片，同意后再装。有的固件（TCL 安卓 5.1）失败时 `adb` 照样返回 0，只看输出里有没有 `Success`。
+   - 输出里有 **`INSTALL_PARSE_FAILED_INCONSISTENT_CERTIFICATES`** 或 `INSTALL_FAILED_UPDATE_INCOMPATIBLE`：电视上的 Donut TV 是别人用另一把钥匙签的，不能覆盖。先问户主：卸载（`adb uninstall app.orange.tv`）会丢掉它的设置、壁纸和照片，同意后再装。有的固件（TCL 安卓 5.1）失败时 `adb` 照样返回 0，只看输出里有没有 `Success`。
    - 其他失败（比如固件不许装桌面类 App，OPPO 电视报 `INSTALL_FAILED_DUPLICATE_PERMISSION: App installation is banned, because of launcher categories`）：改用 guard 版再装（`./gradlew :app:assembleGuardRelease`，产物在 `app/build/outputs/apk/guard/release/`）。
 
 3. 授予只有 adb 能给的权限（某条报错可以忽略，继续下一条）：
@@ -128,7 +128,7 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
    最后四条 `appops` 只有 TCL / 雷鸟认（不同固件认其中两条），别的电视报错是正常的。
    `ACCESS_RESTRICTED_SETTINGS` 只有 Android 13 及以上认：用文件装的 App 在这些系统上开不了无障碍，守护会一直被关掉（#811 #829）。
 
-   再启动一次 Orange，等 5 秒后编译（要几十秒，让 Orange 在电视上更流畅；有的电视要先启动过一次，编译才有效）：
+   再启动一次 Donut TV，等 5 秒后编译（要几十秒，让 Donut TV 在电视上更流畅；有的电视要先启动过一次，编译才有效）：
    ```
    adb shell am start -W -n app.orange.tv/.MainActivity
    adb shell cmd package compile -m speed -f app.orange.tv
@@ -136,7 +136,7 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
 
 4. 屏保：运行 `adb shell settings get secure screensaver_enabled`。结果是 `1` 时再运行：
    ```
-   adb shell settings put secure screensaver_components app.orange.tv/app.orange.tv.dream.OrangeDream
+   adb shell settings put secure screensaver_components app.orange.tv/app.orange.tv.dream.Donut TVDream
    adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver --ez own_screensaver true
    ```
 
@@ -145,7 +145,7 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
    adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver --ez keep_adb true
    ```
 
-6. 启动 Orange：`adb shell am start -W -n app.orange.tv/.MainActivity`，输出里要有 `Status: ok`。
+6. 启动 Donut TV：`adb shell am start -W -n app.orange.tv/.MainActivity`，输出里要有 `Status: ok`。
 
 7. 设为默认桌面（装的是 guard 版时跳过；**小米也跳过**：`adb shell pm path com.mitv.tvhome` 有输出就是小米。有的小米 Android 9 会真的接受这一步，之后短按电源键不再息屏，见 #848，小米交给下一步的桌面守护）：
    ```
@@ -153,21 +153,21 @@ curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/
    ```
    报错时改用 `adb shell cmd package set-home-activity --user 0 app.orange.tv/.MainActivity`。小米、TCL 等固件会无视这一步，没关系，下一步的桌面守护会接管。
 
-   **海信 VIDAA**：先运行 `adb shell getprop persist.vt.use_home_pkg`。有输出（比如 `com.jamdeo.tv.vod`）且不是 `app.orange.tv` 时，记下原值并改成 Orange：
+   **海信 VIDAA**：先运行 `adb shell getprop persist.vt.use_home_pkg`。有输出（比如 `com.jamdeo.tv.vod`）且不是 `app.orange.tv` 时，记下原值并改成 Donut TV：
    ```
    adb shell settings put global orange_vt_home_pkg <原值>
    adb shell setprop persist.vt.use_home_pkg app.orange.tv
    ```
    没有输出就跳过，其他电视没有这个属性。
 
-8. 桌面守护：Orange 启动时会自己打开它。运行 `adb shell settings get secure enabled_accessibility_services`，结果里应该有 `app.orange.tv/app.orange.tv.guard.HomeGuardService`。没有时手动加上，**保留原来的内容**，用冒号连接：
+8. 桌面守护：Donut TV 启动时会自己打开它。运行 `adb shell settings get secure enabled_accessibility_services`，结果里应该有 `app.orange.tv/app.orange.tv.guard.HomeGuardService`。没有时手动加上，**保留原来的内容**，用冒号连接：
    ```powershell
    adb shell "settings put secure enabled_accessibility_services '<原来的值>:app.orange.tv/app.orange.tv.guard.HomeGuardService'"
    adb shell settings put secure accessibility_enabled 1
    ```
    原来的值是 `null` 或空时，只写 `app.orange.tv/app.orange.tv.guard.HomeGuardService`。在 PowerShell 里，原来的值中如果有 `$`，要写成 `` `$ ``。
 
-   有的固件上 `settings` 命令会卡住不返回（腾讯极光盒子 6 / Q5043，等 120 秒后断开）：那就跳过这一步，改用 `adb shell dumpsys accessibility` 看 `Enabled services` 里有没有 Orange，Orange 拿到授权后会自己打开守护。
+   有的固件上 `settings` 命令会卡住不返回（腾讯极光盒子 6 / Q5043，等 120 秒后断开）：那就跳过这一步，改用 `adb shell dumpsys accessibility` 看 `Enabled services` 里有没有 Donut TV，Donut TV 拿到授权后会自己打开守护。
 
 ### TCL 安装（adb 装不上时）
 
@@ -176,18 +176,18 @@ TCL 只能通过电视自带的「多屏互动」安装，要用 guard 版。mac
 ```powershell
 mkdir orange-tcl; cd orange-tcl
 # guard 版暂不单独发布。在源码目录跑 ./gradlew :app:assembleGuardRelease，
-# 再把 app/build/outputs/apk/guard/release/app-guard-release.apk 拷成本目录的 Orange.apk。
+# 再把 app/build/outputs/apk/guard/release/app-guard-release.apk 拷成本目录的 Donut TV.apk。
 curl.exe -fL -o tcast-push.py https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/tcast-push.py
 adb reverse tcp:8765 tcp:8765
 Start-Process python -ArgumentList '-m','http.server','8765','--bind','127.0.0.1' -WindowStyle Hidden
-python tcast-push.py <IP> http://127.0.0.1:8765/Orange.apk app.orange.tv Orange 0 180
+python tcast-push.py <IP> http://127.0.0.1:8765/Donut TV.apk app.orange.tv Donut TV 0 180
 ```
 
 运行最后一条后，请用户在电视右上角的提示里**先按「右」再按确认，选「同意」**。脚本打印装好后，结束 `python -m http.server` 进程，运行 `adb reverse --remove tcp:8765`，再回到上面 Windows 第 3 条。
 
-电视上没有多屏互动时：`adb push Orange.apk /sdcard/Download/Orange.apk`，再请用户用电视上**已有的**文件管理器或当贝市场的「本地安装」打开它安装。电视上没有这类应用时，停下来告诉用户，**不要去下载安装当贝市场或其他应用商店**。
+电视上没有多屏互动时：`adb push Donut TV.apk /sdcard/Download/Donut TV.apk`，再请用户用电视上**已有的**文件管理器或当贝市场的「本地安装」打开它安装。电视上没有这类应用时，停下来告诉用户，**不要去下载安装当贝市场或其他应用商店**。
 
-## Android 4.0–4.4：装 Orange Lite
+## Android 4.0–4.4：装 Donut TV Lite
 
 只在第 2½ 步的数字是 14–20 时做这一节。Lite 是第一版（1.0），测试版，还没在真实的 4.x 电视上测过，告诉用户这一点。它**没有桌面守护**：主页键交给系统的「使用哪个应用」选择框，选一次「始终」就行；固件把主页键锁死在自家桌面时，只能从应用列表打开 Lite，不能说成「接管成功」。4.x 的 shell 里通常没有 `grep`，下面的过滤都在电脑上做（macOS / Linux 用 `grep`，Windows 用 `findstr`）。
 
@@ -209,7 +209,7 @@ adb shell am start -n app.orange.tv.lite/.HomeActivity
 
 `adb install` 要输出 `Success`。第三条用来调亮度，Android 4.0 会报错，忽略即可。
 
-**设为桌面**：4.x 没有能从命令行设默认桌面的办法。请用户**按遥控器的主页键**，系统问「使用哪个应用」时选 **Orange Lite**，再选「**始终**」（有的系统叫「总是」「设为默认」）。
+**设为桌面**：4.x 没有能从命令行设默认桌面的办法。请用户**按遥控器的主页键**，系统问「使用哪个应用」时选 **Donut TV Lite**，再选「**始终**」（有的系统叫「总是」「设为默认」）。
 
 **验收（必须做）**，把原始输出贴给用户：
 
@@ -221,7 +221,7 @@ adb shell "sleep 5; dumpsys window" | grep mCurrentFocus
 
 （Windows 把 `grep` 换成 `findstr`。）第 1 条有 `versionName`：已安装。第 3 条包含 `app.orange.tv.lite`：按主页键进入 Lite，装好了。第 3 条是原桌面或系统的选择框时，请用户再用实体遥控器按一次主页键并选「始终」，然后只重跑第 3 条；还不是，就如实告诉用户这台电视的固件不让换桌面，Lite 只能从应用列表打开。
 
-**还原**：请用户在电视上 设置 → 应用 → Orange Lite → **清除默认设置**；要卸载时 `adb uninstall app.orange.tv.lite`。
+**还原**：请用户在电视上 设置 → 应用 → Donut TV Lite → **清除默认设置**；要卸载时 `adb uninstall app.orange.tv.lite`。
 
 ## 验收（必须做）
 
@@ -231,7 +231,7 @@ adb shell "sleep 5; dumpsys window" | grep mCurrentFocus
 adb shell "dumpsys package app.orange.tv | grep versionName"
 adb shell "cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT"
 adb shell settings get secure enabled_accessibility_services
-adb shell "dumpsys accessibility | grep -c -E 'label=(Orange|app.orange.tv)'"
+adb shell "dumpsys accessibility | grep -c -E 'label=(Donut TV|app.orange.tv)'"
 adb shell input keyevent KEYCODE_HOME
 adb shell "sleep 8; dumpsys window | grep mCurrentFocus"
 ```
@@ -240,14 +240,14 @@ adb shell "sleep 8; dumpsys window | grep mCurrentFocus"
 - 第 2 条是系统给出的默认桌面。小米仍然是 PatchWall（`com.mitv.tvhome`）、TCL 仍然是自己的桌面时正常，守护接管；是 `app.orange.tv` 更好。
 - 第 3 条有 `app.orange.tv/app.orange.tv.guard.HomeGuardService`：守护已打开（原生 Android TV 已是默认桌面时可能没有，看第 6 条即可）。
 - 第 4 条大于 0：守护正在运行。
-- **第 6 条包含 `app.orange.tv`：按主页键进入 Orange，安装成功。** 这一条不满足，就不能告诉用户装好了。有的固件按主页键后自家桌面要停几秒，守护才把 Orange 拉回来（OPPO ColorOS TV 约 5 秒，#664）：第 6 条是原桌面时，再运行一次 `adb shell "sleep 5; dumpsys window | grep mCurrentFocus"`，两次都不是 `app.orange.tv` 才算失败。
+- **第 6 条包含 `app.orange.tv`：按主页键进入 Donut TV，安装成功。** 这一条不满足，就不能告诉用户装好了。有的固件按主页键后自家桌面要停几秒，守护才把 Donut TV 拉回来（OPPO ColorOS TV 约 5 秒，#664）：第 6 条是原桌面时，再运行一次 `adb shell "sleep 5; dumpsys window | grep mCurrentFocus"`，两次都不是 `app.orange.tv` 才算失败。
 - 第 2、3、6 条的原始输出必须贴给用户，不要只说「成功」。第 2 条报错（老系统没有 `cmd`）时，改用 `adb shell pm resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT`。
 
 第 6 条不是 `app.orange.tv` 时，等 5 秒再运行一次第 5、6 条（有的电视守护启动得慢）。还不是，看「常见情况」。
 
 `input keyevent` 模拟的主页键不经过守护的按键过滤，在少数电视上（索尼 Android 9）结果和实体遥控器不同：这时请用户用实体遥控器按一次主页键，再只运行第 6 条，以这次为准。
 
-都通过后，征得用户同意再 `adb reboot`，等一两分钟电视开机后重新 `adb connect <IP>:5555`，再跑一次第 6 条，确认开机直接进入 Orange。
+都通过后，征得用户同意再 `adb reboot`，等一两分钟电视开机后重新 `adb connect <IP>:5555`，再跑一次第 6 条，确认开机直接进入 Donut TV。
 
 全部做完后运行 `adb disconnect`：有的电视同一时间只接受一台设备，这台电脑不断开，用户手机上的甲壳虫等工具就连不上（#764）。一行命令装完会自动断开。
 
@@ -259,7 +259,7 @@ macOS / Linux：
 curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s restore
 ```
 
-最后加 `--uninstall`（`bash -s restore --uninstall`）会顺便卸载 Orange。
+最后加 `--uninstall`（`bash -s restore --uninstall`）会顺便卸载 Donut TV。
 
 Windows 逐条运行：
 
@@ -282,7 +282,7 @@ adb shell cmd role remove-role-holder --user 0 android.app.role.HOME app.orange.
 
 - `adb shell settings get secure screensaver_components` 是 `app.orange.tv/...` 时，用 `adb shell settings get secure screensaver_default_component` 的结果写回去：`adb shell settings put secure screensaver_components <默认值>`。
 - `adb shell settings get secure enabled_accessibility_services`：从结果里去掉 `app.orange.tv/app.orange.tv.guard.HomeGuardService`（和它前后多余的冒号），其他服务原样保留写回；只剩它自己时运行 `adb shell settings delete secure enabled_accessibility_services`。
-- 小米（`adb shell pm path com.mitv.tvhome` 有输出）：`adb shell cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT` 的最后一行是 `app.orange.tv/...` 时，运行 `adb shell cmd package set-home-activity --user 0 com.mitv.tvhome/.MainActivityUserMode`，再重启电视一次（#848：默认桌面改成 Orange 后短按电源键不息屏）。
+- 小米（`adb shell pm path com.mitv.tvhome` 有输出）：`adb shell cmd package resolve-activity --brief -a android.intent.action.MAIN -c android.intent.category.HOME -c android.intent.category.DEFAULT` 的最后一行是 `app.orange.tv/...` 时，运行 `adb shell cmd package set-home-activity --user 0 com.mitv.tvhome/.MainActivityUserMode`，再重启电视一次（#848：默认桌面改成 Donut TV 后短按电源键不息屏）。
 - 海信 VIDAA：`adb shell settings get global orange_vt_home_pkg` 有值（不是 `null`）时，运行 `adb shell setprop persist.vt.use_home_pkg <这个值>` 和 `adb shell settings delete global orange_vt_home_pkg`。没有值、但 `adb shell getprop persist.vt.use_home_pkg` 是 `app.orange.tv`（1.15 及以前手动改过）并且装有 `com.jamdeo.tv.vod` 时，运行 `adb shell setprop persist.vt.use_home_pkg com.jamdeo.tv.vod`。
 - 要卸载时 `adb uninstall app.orange.tv`。
 - 最后 `adb shell input keyevent KEYCODE_HOME`，电视回到原来的桌面。
@@ -290,23 +290,23 @@ adb shell cmd role remove-role-holder --user 0 android.app.role.HOME app.orange.
 ## 常见情况
 
 - **小米**：`resolve-activity` 仍然显示 PatchWall（`com.mitv.tvhome`）是正常的，由桌面守护接管。千万不要停用 `com.mitv.tvhome`。建议开 `KEEP_ADB`。
-- **小米 Android 9 低内存机型（`adb shell getprop ro.config.low_ram` 是 `true`，比如 MFTP0）**：系统不许任何第三方通知监听，`allow_listener` 没有输出但不生效，这是正常的，不要反复重试。小米待机时会强停 Orange，1.21 起 Orange 改由系统的同步服务在强停后约 30–60 秒拉回来，之后守护会把 ADB 也打开。所以待机超过一分钟再唤醒，直接是 Orange；只待机十几秒就唤醒，会先看到原桌面，最多再等一分钟左右才切回 Orange。测待机时请待机 1 分钟以上，唤醒后等 30 秒再看结果，不要在这期间按主页键或打开别的 App。1.20 及更早的版本在这类电视上待机后回不来。
+- **小米 Android 9 低内存机型（`adb shell getprop ro.config.low_ram` 是 `true`，比如 MFTP0）**：系统不许任何第三方通知监听，`allow_listener` 没有输出但不生效，这是正常的，不要反复重试。小米待机时会强停 Donut TV，1.21 起 Donut TV 改由系统的同步服务在强停后约 30–60 秒拉回来，之后守护会把 ADB 也打开。所以待机超过一分钟再唤醒，直接是 Donut TV；只待机十几秒就唤醒，会先看到原桌面，最多再等一分钟左右才切回 Donut TV。测待机时请待机 1 分钟以上，唤醒后等 30 秒再看结果，不要在这期间按主页键或打开别的 App。1.20 及更早的版本在这类电视上待机后回不来。
 - **TCL**：`adb install` 一定失败（`INSTALL_FAILED_VERIFICATION_FAILURE`），按「TCL 安装」走多屏互动。用户没看到电视上的提示时，重新运行一次。
 - **创维（比如 7T631_T60，Android 13）**：`adb install` 报 `INSTALL_FAILED_USER_RESTRICTED` 时，是固件在校验 adb 安装。先用 `adb shell settings get global verifier_verify_adb_installs` 记下原值，再运行 `adb shell settings put global verifier_verify_adb_installs 0`，然后重新安装（macOS / Linux 重新运行一行命令）。装好后把原值写回去（原值是 `null` 时用 `adb shell settings delete global verifier_verify_adb_installs`），以后升级时再关一次。这条来自用户反馈，没有在创维真机上验证过。
 - **雷鸟 55S595C Ultra（MT9655）等只有「无线调试」的机型**：拿不到授权，能装但接管不了主页键。
-- **海信 VIDAA**：第 7 步改了 `persist.vt.use_home_pkg` 以后，主页键直接进 Orange；但开机仍会先进聚好看（固件在开机完成前拦截第三方 App），按一次主页键即可。
-- **Vidda 其他系统、OPPO K9、雷鸟鹤 6**：能装，但开机进不了 Orange（固件只认自家桌面，除非删掉原桌面，这里不做）。可以把 Orange 当普通 App 用。
-- **验收第 4 条是 0，但第 3 条里有 Orange**：常见于升级之后，系统还在找旧的安装目录（小米 Android 9，#72）。运行 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新验收。macOS / Linux 也可以直接运行 `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`。
+- **海信 VIDAA**：第 7 步改了 `persist.vt.use_home_pkg` 以后，主页键直接进 Donut TV；但开机仍会先进聚好看（固件在开机完成前拦截第三方 App），按一次主页键即可。
+- **Vidda 其他系统、OPPO K9、雷鸟鹤 6**：能装，但开机进不了 Donut TV（固件只认自家桌面，除非删掉原桌面，这里不做）。可以把 Donut TV 当普通 App 用。
+- **验收第 4 条是 0，但第 3 条里有 Donut TV**：常见于升级之后，系统还在找旧的安装目录（小米 Android 9，#72）。运行 `adb shell am force-stop app.orange.tv`，等 3 秒，再 `adb shell am start -W -n app.orange.tv/.MainActivity`，然后重新验收。macOS / Linux 也可以直接运行 `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/install.sh | TV=<IP> bash -s repair`。
 - **用了一段时间后按主页键又回到原桌面**：同上，先试一次上面的强停再打开。
-- **验收第 4 条是 0，第 3 条里也没有 Orange**：有的固件拦截侧载的无障碍服务。请用户在电视的安全中心或权限管理里允许 Orange 自启动、无障碍，然后重新运行 `adb shell am start -n app.orange.tv/.MainActivity` 再验收。
+- **验收第 4 条是 0，第 3 条里也没有 Donut TV**：有的固件拦截侧载的无障碍服务。请用户在电视的安全中心或权限管理里允许 Donut TV 自启动、无障碍，然后重新运行 `adb shell am start -n app.orange.tv/.MainActivity` 再验收。
 - **忘了家长密码**：`adb shell am broadcast -a app.orange.tv.CONFIG -n app.orange.tv/.guard.ConfigReceiver --ez clear_pin true`，密码就关掉了。
-- **不支持**：LG webOS、三星 Tizen、华为智慧屏（鸿蒙）、Android 3.x 及更老的电视（Android 4.0–4.4 装 Orange Lite，见上面）。老乐视、荣耀智慧屏、老康佳（看不到版本号）等打不开 ADB 的机型也暂时没办法。
+- **不支持**：LG webOS、三星 Tizen、华为智慧屏（鸿蒙）、Android 3.x 及更老的电视（Android 4.0–4.4 装 Donut TV Lite，见上面）。老乐视、荣耀智慧屏、老康佳（看不到版本号）等打不开 ADB 的机型也暂时没办法。
 
 ## 用户常问
 
-- **会员和 App 还在吗？** 在。Orange 只换桌面，电视里的 App、账号和会员都不变，从 Orange 里打开即可。小米 / TCL 的会员、小爱同学、小米账号、有线电视都不受影响。
-- **原来的桌面还能用吗？** 能。原来的桌面作为一个 App 留在 Orange 的 App 列表里（小米的 PatchWall 也在，从「桌面」磁贴进入），打开就是原来的界面和推荐内容。小米影视、PatchWall 的内容都在。
-- **开机广告能去掉吗？** 不能。开机广告是固件在 Orange 启动之前播的。
+- **会员和 App 还在吗？** 在。Donut TV 只换桌面，电视里的 App、账号和会员都不变，从 Donut TV 里打开即可。小米 / TCL 的会员、小爱同学、小米账号、有线电视都不受影响。
+- **原来的桌面还能用吗？** 能。原来的桌面作为一个 App 留在 Donut TV 的 App 列表里（小米的 PatchWall 也在，从「桌面」磁贴进入），打开就是原来的界面和推荐内容。小米影视、PatchWall 的内容都在。
+- **开机广告能去掉吗？** 不能。开机广告是固件在 Donut TV 启动之前播的。
 - **以后怎么升级？** 1.32 起，电视上控制中心出现「有新版本」时点「下载并安装」，在系统安装界面确认即可（小米上验证过）。电视不让 App 安装应用时，再运行一次同样的安装命令（Windows 重复第 3 步的 1、2、3、6 条），设置都会保留。
 - **装好了但有地方不对（主页键、待机、开机、信号源、亮度）**：按 https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/site/adapt.md 给这台电视做适配：自检、当场改能改的、整理成报告。
 - **电视上有问题，想反馈给作者**：macOS / Linux 运行 `curl -fsSL https://raw.githubusercontent.com/orange-tv888/orange-tv-update/main/tools/report.sh | TV=<IP> bash`，它只读不改，生成 `orange-report-<机型>.md`；读一遍，再贴进 https://github.com/orange-tv888/orange-tv-update/issues/new?template=device.yml 。没有电脑时，用手机扫个性化里的二维码，在手机页底部「反馈问题」复制诊断信息。

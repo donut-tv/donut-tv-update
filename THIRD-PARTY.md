@@ -1,6 +1,6 @@
 # 第三方组件与许可 / Third-party components
 
-Orange 本身以 MIT 许可发布（见 LICENSE），并基于 Aerial 修改。安装包里还带着下面这些组件；每一行的许可全文都在对应项目的仓库里。装好后的电视上也能在「设置 → 关于 → 开源许可」里读到本文件。
+Donut TV 本身以 MIT 许可发布（见 LICENSE），并基于 Aerial 修改。安装包里还带着下面这些组件；每一行的许可全文都在对应项目的仓库里。装好后的电视上也能在「设置 → 关于 → 开源许可」里读到本文件。
 
 - AndroidX Compose（ui / foundation / animation，BOM 2025.11.01）1.9.5 — Apache-2.0 — 界面
 - androidx.activity:activity-compose 1.10.1 — Apache-2.0 — 界面宿主
@@ -20,12 +20,12 @@ Orange 本身以 MIT 许可发布（见 LICENSE），并基于 Aerial 修改。�
 
 ## 上游
 
-Orange 是 Aerial 的修改版（https://github.com/pengchujin/aerial-tv），上游以 MIT 发布，Copyright (c) 2026 pengchujin。上游的版权声明与许可全文保留在 LICENSE 中，未作删改；Orange 的修改部分另有版权行。
+Donut TV 是 Aerial 的修改版（https://github.com/pengchujin/aerial-tv），上游以 MIT 发布，Copyright (c) 2026 pengchujin。上游的版权声明与许可全文保留在 LICENSE 中，未作删改；Donut TV 的修改部分另有版权行。
 
 航拍影片的版权归 Apple，由 Apple 的服务器直接播放，不随本应用分发。每日精选壁纸来自必应（Bing）。
 
 ## Third-party components (English)
 
-Orange is released under the MIT licence (see LICENSE) and is a modified version of Aerial. The APK bundles the components listed above; every licence is available in the corresponding project's repository, and the TV shows this file under Settings → About → Open-source licences.
+Donut TV is released under the MIT licence (see LICENSE) and is a modified version of Aerial. The APK bundles the components listed above; every licence is available in the corresponding project's repository, and the TV shows this file under Settings → About → Open-source licences.
 
 Aerial films belong to Apple and stream from Apple's servers; they are not distributed with this app. The photo of the day comes from Bing.
